@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import Button from '../../components/Button.astro';
+import PhotoPlaceholder from '../../components/PhotoPlaceholder.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import { projects, type Project } from '../../data/projects';
+import { getTechnology } from '../../data/technologies';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const techs = project.technologies.map(getTechnology).filter((t) => t !== undefined);
+const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
+---
+
+<Layout title={project.title} description={project.description}>
+  <article>
+    <section class="mx-auto max-w-7xl px-5 pb-12 pt-16 lg:px-8 lg:pt-24">
+      <a href="/realizace" class="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.15em] text-grafika hover:text-cihla-dark">
+        ← Všechny realizace
+      </a>
+      <SectionLabel>Realizace</SectionLabel>
+      <h1 class="mt-4 max-w-4xl text-display font-bold">{project.title}</h1>
+
+      <dl class="mt-8 flex flex-wrap gap-x-12 gap-y-4 border-y border-grafit/10 py-6">
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">Lokalita</dt>
+          <dd class="mt-1 text-lg font-semibold">{project.location}</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">Rok</dt>
+          <dd class="mt-1 text-lg font-semibold">{project.year}</dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">Rozsah prací</dt>
+          <dd class="mt-1 text-lg font-semibold">{project.scope.join(' · ')}</dd>
+        </div>
+      </dl>
+
+      <p class="mt-8 max-w-2xl text-body text-grafika">{project.description}</p>
+    </section>
+
+    <!-- Galerie — po napojení Sanity nahradí lightbox s progresivním načítáním -->
+    <section class="mx-auto max-w-7xl px-5 lg:px-8">
+      <PhotoPlaceholder label={`${project.title} — hlavní fotografie`} ratio="aspect-[21/9]" />
+      <div class="mt-6 grid grid-cols-2 gap-6 lg:grid-cols-3">
+        {
+          Array.from({ length: project.galleryCount }).map((_, i) => (
+            <PhotoPlaceholder label={`Foto ${i + 1}`} ratio="aspect-[4/3]" />
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      techs.length > 0 && (
+        <section class="mx-auto max-w-7xl px-5 pt-20 lg:px-8">
+          <SectionLabel>Použité technologie</SectionLabel>
+          <div class="mt-6 grid gap-px bg-grafit/10 sm:grid-cols-2 lg:grid-cols-3">
+            {techs.map((t) => (
+              <a href="/technologie" class="group bg-beton p-7 transition-colors hover:bg-papir">
+                <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">{t.usedFor}</p>
+                <h3 class="mt-2 text-lg font-bold group-hover:text-cihla-dark">{t.name}</h3>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <h2 class="text-h2 font-bold">Další realizace</h2>
+        <Button href="/realizace" variant="outline" arrow>Všechny realizace</Button>
+      </div>
+      <div class="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {others.map((p, i) => <ProjectCard project={p} number={String(i + 1).padStart(2, '0')} />)}
+      </div>
+    </section>
+  </article>
+
+  <CtaSection title="Líbí se vám tato realizace?" text="Popište nám svůj záměr — podobnou stavbu rádi zrealizujeme i vám." />
+</Layout>

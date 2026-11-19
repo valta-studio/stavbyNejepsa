@@ -1,0 +1,27 @@
+---
+// Karta z design boardu: velké pořadové číslo, titulek, text, šipka.
+interface Props {
+  number: string;
+  title: string;
+  text: string;
+  href: string;
+  variant?: 'filled' | 'outline' | 'plain';
+}
+
+const { number, title, text, href, variant = 'plain' } = Astro.props;
+
+const variants = {
+  filled: 'bg-cihla text-papir hover:bg-grafit',
+  outline: 'border border-cihla bg-transparent text-grafit hover:bg-cihla hover:text-papir',
+  plain: 'bg-papir text-grafit hover:bg-grafit hover:text-papir',
+};
+
+const titleColor = variant === 'outline' ? 'text-cihla-dark group-hover:text-papir' : '';
+---
+
+<a href={href} class={`group flex h-full flex-col p-7 transition-colors duration-200 ${variants[variant]}`}>
+  <span class="text-3xl font-light tabular-nums">{number}</span>
+  <h3 class={`mt-5 text-xl font-bold leading-snug ${titleColor}`}>{title}</h3>
+  <p class="mt-3 text-sm leading-relaxed opacity-80">{text}</p>
+  <span aria-hidden="true" class="mt-auto pt-6 text-2xl leading-none transition-transform duration-200 group-hover:translate-x-1.5">→</span>
+</a>

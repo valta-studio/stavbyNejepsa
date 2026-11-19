@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import Button from '../components/Button.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { site } from '../data/site';
+---
+
+<Layout
+  title="O nás"
+  description="Rodinná stavební firma Stavby Nejepša — kompletní realizace staveb, rekonstrukce a střechy. Vlastní lidé, prověřené materiály, osobní odpovědnost."
+>
+  <section class="mx-auto max-w-7xl px-5 pb-12 pt-16 lg:px-8 lg:pt-24">
+    <SectionLabel>Kdo jsme</SectionLabel>
+    <h1 class="mt-4 max-w-4xl text-display font-bold">Rodinná stavební firma</h1>
+    <p class="mt-6 max-w-2xl text-body text-grafika">
+      Stavbu převezmeme kompletně na klíč, nebo jako subdodavatel s plnou odpovědností za svou
+      část. Za každou zakázkou stojí konkrétní lidé — a výsledky si můžete prohlédnout v našich
+      realizacích.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-7xl px-5 lg:px-8">
+    <PhotoPlaceholder label="Tým / stavba — fotografie dodá klient" ratio="aspect-[21/9]" />
+  </section>
+
+  <!-- Profil — vzor „medailonek“ z design boardu -->
+  <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+    <div class="grid gap-10 bg-papir p-8 lg:grid-cols-[1fr_2fr] lg:p-12">
+      <PhotoPlaceholder label="Portrét jednatele" ratio="aspect-[3/4]" class="max-w-sm" />
+      <div>
+        <h2 class="text-h3 font-bold">Jednatel společnosti</h2>
+        <SectionLabel class="mt-2">Náš přístup</SectionLabel>
+        <div class="mt-6 max-w-xl space-y-4 text-body text-grafika">
+          <p>
+            Ke stavění mě přivedla rodina — a stejný přístup držíme dodnes. Každou stavbu vedeme
+            tak, jako bychom ji stavěli pro sebe: poctivé detaily, prověřené materiály a slovo,
+            které platí.
+          </p>
+          <p>
+            Na stavbě potkáte naše kmenové lidi, ne anonymní subdodávky. Proto si za výsledkem
+            stojíme jménem firmy i jménem rodiny.
+          </p>
+          <!-- TODO: skutečný medailonek a foto dodá klient -->
+        </div>
+        <a href="/kontakt" class="mt-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em] text-cihla-dark hover:text-grafit">
+          Kontaktujte nás <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-grafit text-papir">
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 py-20 lg:grid-cols-3 lg:px-8">
+      <div class="border-t border-papir/20 pt-6">
+        <span class="text-4xl font-bold text-cihla">15+</span>
+        <p class="mt-2 text-sm text-papir/70">let zkušeností na stavbách všeho druhu</p>
+      </div>
+      <div class="border-t border-papir/20 pt-6">
+        <span class="text-4xl font-bold text-cihla">100+</span>
+        <p class="mt-2 text-sm text-papir/70">dokončených zakázek — domy, střechy, fasády</p>
+      </div>
+      <div class="border-t border-papir/20 pt-6">
+        <span class="text-4xl font-bold text-cihla">2</span>
+        <p class="mt-2 text-sm text-papir/70">pobočky pro rychlý dojezd na stavbu</p>
+      </div>
+      <!-- TODO: skutečná čísla potvrdí klient -->
+    </div>
+  </section>
+
+  <!-- Certifikáty -->
+  <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+    <SectionLabel>Osvědčení</SectionLabel>
+    <h2 class="mt-3 text-h2 font-bold">Certifikace a proškolení</h2>
+    <p class="mt-4 max-w-2xl text-body text-grafika">
+      Jsme proškolení aplikátoři systémů, které používáme — na dílo se tak vztahují plné
+      materiálové záruky výrobců.
+      <!-- TODO: konkrétní certifikáty dodá klient -->
+    </p>
+    <div class="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4">
+      {
+        Array.from({ length: 4 }).map((_, i) => (
+          <PhotoPlaceholder label={`Certifikát ${i + 1}`} ratio="aspect-[3/4]" />
+        ))
+      }
+    </div>
+    <div class="mt-12">
+      <Button href={site.googleProfileUrl} variant="dark" arrow>Recenze na Google profilu</Button>
+    </div>
+  </section>
+
+  <CtaSection />
+</Layout>

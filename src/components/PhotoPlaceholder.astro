@@ -1,0 +1,16 @@
+---
+// Dočasný zástupce fotografie — fotografie realizací dodá klient.
+// Po napojení Sanity se nahradí <img> s transformacemi přes Sanity CDN.
+interface Props {
+  label?: string;
+  ratio?: string; // tailwind aspect-* hodnota
+  class?: string;
+}
+const { label = 'Fotografie dodá klient', ratio = 'aspect-[16/9]', class: className = '' } = Astro.props;
+---
+
+<div class={`photo-placeholder relative ${ratio} w-full overflow-hidden ${className}`} role="img" aria-label={label}>
+  <span class="absolute inset-0 flex items-center justify-center p-4 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-grafika">
+    {label}
+  </span>
+</div>

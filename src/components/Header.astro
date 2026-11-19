@@ -1,0 +1,87 @@
+---
+import Button from './Button.astro';
+import { site } from '../data/site';
+
+const nav = [
+  { href: '/rodinne-domy-na-klic', label: 'Domy na klíč' },
+  { href: '/rekonstrukce', label: 'Rekonstrukce' },
+  { href: '/strechy', label: 'Střechy' },
+  { href: '/fasady', label: 'Fasády' },
+  { href: '/realizace', label: 'Realizace' },
+  { href: '/technologie', label: 'Technologie' },
+  { href: '/o-nas', label: 'O nás' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+
+const current = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-grafit/10 bg-papir">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 lg:px-8">
+    <a href="/" class="flex items-baseline gap-2" aria-label={site.name}>
+      <!-- TODO: nahradit SVG lockupem z vektorového loga -->
+      <span class="text-lg font-bold uppercase tracking-tight">Stavby<span class="text-cihla-dark">&nbsp;Nejepša</span></span>
+      <span class="hidden text-[10px] font-medium uppercase tracking-[0.2em] text-grafika sm:inline">s.r.o.</span>
+    </a>
+
+    <nav class="hidden items-center gap-6 xl:flex" aria-label="Hlavní navigace">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class={`text-sm font-medium transition-colors hover:text-cihla-dark ${
+              current.startsWith(item.href) ? 'text-cihla-dark' : 'text-grafit'
+            }`}
+            aria-current={current.startsWith(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="hidden xl:block">
+      <Button href="/poptavka">Poptávka</Button>
+    </div>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="flex h-11 w-11 items-center justify-center border border-grafit/20 xl:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Otevřít menu"
+    >
+      <span class="flex flex-col gap-1.5">
+        <span class="block h-0.5 w-5 bg-grafit"></span>
+        <span class="block h-0.5 w-5 bg-grafit"></span>
+        <span class="block h-0.5 w-5 bg-grafit"></span>
+      </span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-grafit/10 bg-papir xl:hidden">
+    <nav class="mx-auto flex max-w-7xl flex-col px-5 py-4" aria-label="Mobilní navigace">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="border-b border-grafit/10 py-3.5 text-base font-medium text-grafit">
+            {item.label}
+          </a>
+        ))
+      }
+      <div class="pt-5">
+        <Button href="/poptavka" class="w-full">Nezávazná poptávka</Button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+  });
+</script>

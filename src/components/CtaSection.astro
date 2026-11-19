@@ -1,0 +1,35 @@
+---
+import Button from './Button.astro';
+import SectionLabel from './SectionLabel.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Nezávazná poptávka',
+  text = 'Popište nám svůj záměr. Ozveme se do dvou pracovních dnů, projdeme s vámi rozsah a domluvíme zaměření zdarma.',
+} = Astro.props;
+---
+
+<section class="bg-grafit text-papir">
+  <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 py-20 lg:grid-cols-2 lg:px-8">
+    <div>
+      <SectionLabel class="!text-cihla">Pojďme stavět</SectionLabel>
+      <h2 class="mt-4 text-h2 font-bold">{title}</h2>
+      <p class="mt-5 max-w-xl text-body text-papir/75">{text}</p>
+    </div>
+    <div class="flex flex-col items-start gap-5 lg:items-end">
+      <Button href="/poptavka" arrow>Poslat poptávku</Button>
+      <a
+        href={`tel:${site.phone.replace(/\s/g, '')}`}
+        class="text-xl font-semibold text-papir hover:text-cihla"
+        data-track="phone"
+      >
+        {site.phone}
+      </a>
+    </div>
+  </div>
+</section>

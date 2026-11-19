@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import { site, branches } from '../data/site';
+import { mainServices } from '../data/services';
+---
+
+<Layout
+  title="Nezávazná poptávka"
+  description="Pošlete nám nezávaznou poptávku na stavbu, rekonstrukci, střechu nebo fasádu. Ozveme se do dvou pracovních dnů."
+>
+  <section class="mx-auto max-w-7xl px-5 pb-24 pt-16 lg:px-8 lg:pt-24">
+    <div class="grid gap-14 lg:grid-cols-[1fr_1.2fr]">
+      <div>
+        <SectionLabel>Pojďme stavět</SectionLabel>
+        <h1 class="mt-4 text-display font-bold">Nezávazná poptávka</h1>
+        <p class="mt-6 max-w-xl text-body text-grafika">
+          Popište nám svůj záměr — čím konkrétněji, tím přesnější nabídku dostanete. Ozveme se do
+          dvou pracovních dnů a domluvíme zaměření zdarma.
+        </p>
+        <div class="mt-10 space-y-6">
+          {
+            branches.map((b) => (
+              <div class="border-l-2 border-cihla pl-6">
+                <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">{b.name}</p>
+                <a href={`tel:${b.phone.replace(/\s/g, '')}`} class="mt-1 block text-xl font-semibold hover:text-cihla-dark" data-track="phone">
+                  {b.phone}
+                </a>
+              </div>
+            ))
+          }
+          <div class="border-l-2 border-cihla pl-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">E-mail</p>
+            <a href={`mailto:${site.email}`} class="mt-1 block text-xl font-semibold hover:text-cihla-dark" data-track="email">
+              {site.email}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        Produkce: odeslání přes Astro API route → Netlify Function → Resend/SMTP + zápis do Sanity.
+        Ochrana: honeypot (níže) + Cloudflare Turnstile + rate limit. Skrytá pole nesou zdrojovou URL a UTM.
+      -->
+      <form id="inquiry-form" class="bg-papir p-8 lg:p-10" method="post" action="/dekujeme" novalidate>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="flex flex-col gap-2">
+            <label for="name" class="text-xs font-semibold uppercase tracking-[0.15em]">Jméno a příjmení *</label>
+            <input id="name" name="name" type="text" required autocomplete="name"
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla" />
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="phone" class="text-xs font-semibold uppercase tracking-[0.15em]">Telefon *</label>
+            <input id="phone" name="phone" type="tel" required autocomplete="tel"
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla" />
+          </div>
+          <div class="flex flex-col gap-2 sm:col-span-2">
+            <label for="email" class="text-xs font-semibold uppercase tracking-[0.15em]">E-mail *</label>
+            <input id="email" name="email" type="email" required autocomplete="email"
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla" />
+          </div>
+          <div class="flex flex-col gap-2 sm:col-span-2">
+            <label for="service" class="text-xs font-semibold uppercase tracking-[0.15em]">Co poptáváte</label>
+            <select id="service" name="service"
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla">
+              <option value="">— Vyberte službu —</option>
+              {mainServices.map((s) => <option value={s.slug}>{s.title}</option>)}
+              <option value="jine">Jiné / nevím</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-2 sm:col-span-2">
+            <label for="message" class="text-xs font-semibold uppercase tracking-[0.15em]">Popis záměru *</label>
+            <textarea id="message" name="message" rows="6" required
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla"
+              placeholder="Lokalita, rozsah prací, termín, odkaz na projekt…"></textarea>
+          </div>
+        </div>
+
+        <!-- Honeypot -->
+        <div class="hidden" aria-hidden="true">
+          <label for="website">Nevyplňujte</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <!-- Skrytá pole pro atribuci (vyplní skript) -->
+        <input type="hidden" name="source_url" id="source_url" />
+        <input type="hidden" name="utm" id="utm" />
+
+        <label class="mt-6 flex items-start gap-3 text-sm text-grafika">
+          <input type="checkbox" required class="mt-1 accent-[#b84f31]" />
+          <span>Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky. *</span>
+        </label>
+
+        <button
+          type="submit"
+          class="mt-8 inline-flex w-full items-center justify-center gap-3 bg-cihla px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-papir transition-colors hover:bg-grafit sm:w-auto"
+        >
+          Odeslat poptávku <span aria-hidden="true">→</span>
+        </button>
+        <p class="mt-4 text-xs text-grafika">* povinné pole</p>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Atribuce: zdrojová URL + UTM parametry do skrytých polí
+  const sourceUrl = document.getElementById('source_url') as HTMLInputElement | null;
+  const utm = document.getElementById('utm') as HTMLInputElement | null;
+  if (sourceUrl) sourceUrl.value = window.location.href;
+  if (utm) {
+    const params = new URLSearchParams(window.location.search);
+    utm.value = [...params.entries()]
+      .filter(([k]) => k.startsWith('utm_'))
+      .map(([k, v]) => `${k}=${v}`)
+      .join('&');
+  }
+
+  // DEMO: backend zatím není — po validaci přesměrujeme na konverzní URL /dekujeme.
+  const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const honeypot = form.querySelector<HTMLInputElement>('input[name="website"]');
+    if (honeypot?.value) return; // bot
+    window.location.href = '/dekujeme';
+  });
+</script>

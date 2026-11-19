@@ -1,0 +1,193 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import Button from '../components/Button.astro';
+import NumberedCard from '../components/NumberedCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { site } from '../data/site';
+import { mainServices } from '../data/services';
+import { featuredProjects, projects } from '../data/projects';
+import { technologies } from '../data/technologies';
+
+const whyUs = [
+  {
+    title: 'Rodinná firma',
+    text: 'Stavbu vede majitel, ne anonymní dispečink. Jste v kontaktu s člověkem, který za dílo ručí jménem.',
+  },
+  {
+    title: 'Vlastní lidé',
+    text: 'Tesaři, zedníci i pokrývači jsou naši kmenoví pracovníci. Nepřeprodáváme zakázky dál.',
+  },
+  {
+    title: 'Prověřené materiály',
+    text: 'Pracujeme se systémy renomovaných výrobců a jako proškolení aplikátoři přenášíme jejich záruky na vás.',
+  },
+  {
+    title: 'Rozpočet předem',
+    text: 'Položkový rozpočet a harmonogram dostanete před podpisem smlouvy. Vícepráce jen po odsouhlasení.',
+  },
+];
+
+const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
+---
+
+<Layout
+  title="Stavby, rekonstrukce a střechy na klíč"
+  description="Rodinná stavební firma. Rodinné domy na klíč, rekonstrukce, ploché i šikmé střechy a fasády. Kompletní realizace staveb s vlastními lidmi a prověřenými materiály."
+>
+  <!-- 1. Hero -->
+  <section class="mx-auto max-w-7xl px-5 pb-12 pt-16 lg:px-8 lg:pt-28">
+    <SectionLabel>Stavební firma</SectionLabel>
+    <h1 class="mt-5 max-w-5xl text-display font-bold">
+      Dřevostavby i zděné domy <span class="text-cihla-dark">na klíč</span>
+    </h1>
+    <p class="mt-7 max-w-2xl text-body text-grafika">
+      Jsme rodinná stavební firma. Stavbu převezmeme kompletně na klíč, nebo jako subdodavatel
+      s plnou odpovědností za svou část. Domy, rekonstrukce, střechy a fasády.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <Button href="/realizace" arrow>Projekty</Button>
+      <Button href="/poptavka" variant="outline">Nezávazná poptávka</Button>
+    </div>
+  </section>
+
+  <!-- Hero foto (LCP element = obrázek) -->
+  <section class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="relative">
+      <PhotoPlaceholder label="Hero — nejlepší realizace (foto dodá klient)" ratio="aspect-[16/8]" />
+      <a
+        href={`/realizace/${featuredProjects[0]?.slug}`}
+        class="absolute bottom-0 left-6 inline-flex items-center gap-3 bg-cihla px-5 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-papir transition-colors hover:bg-grafit"
+      >
+        <span class="font-light tabular-nums">01</span>
+        {featuredProjects[0]?.title}
+      </a>
+    </div>
+  </section>
+
+  <!-- 2. Hlavní oblasti činnosti -->
+  <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+    <SectionLabel>Co děláme</SectionLabel>
+    <h2 class="mt-3 max-w-3xl text-h2 font-bold">Hlavní oblasti činnosti</h2>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        mainServices.map((s, i) => (
+          <NumberedCard
+            number={String(i + 1).padStart(2, '0')}
+            title={s.title}
+            text={s.lead}
+            href={s.path}
+            variant={i === 0 ? 'filled' : 'plain'}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 3. Featured realizace -->
+  <section class="bg-smrk">
+    <div class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <SectionLabel>Realizace</SectionLabel>
+          <h2 class="mt-3 text-h2 font-bold">Vybrané projekty</h2>
+        </div>
+        <Button href="/realizace" variant="outline" arrow>Všechny realizace</Button>
+      </div>
+      <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {featuredProjects.map((p, i) => <ProjectCard project={p} number={String(i + 1).padStart(2, '0')} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Proč my -->
+  <section class="bg-grafit text-papir">
+    <div class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+      <SectionLabel class="!text-cihla">Proč my</SectionLabel>
+      <h2 class="mt-3 max-w-3xl text-h2 font-bold">Proč si vybrat naši firmu</h2>
+      <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          whyUs.map((item, i) => (
+            <div class="border-t border-papir/20 pt-6">
+              <span class="text-3xl font-light tabular-nums text-cihla">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="mt-4 text-xl font-bold">{item.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-papir/70">{item.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Technologie a dodavatelé -->
+  <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div>
+        <SectionLabel>Materiály a systémy</SectionLabel>
+        <h2 class="mt-3 text-h2 font-bold">Používané technologie</h2>
+      </div>
+      <Button href="/technologie" variant="outline" arrow>Všechny technologie</Button>
+    </div>
+    <div class="mt-12 grid gap-px bg-grafit/10 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        technologies.slice(0, 6).map((t) => (
+          <div class="bg-beton p-7">
+            <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">{t.usedFor}</p>
+            <h3 class="mt-2 text-lg font-bold">{t.name}</h3>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 6. Poslední realizace / Instagram -->
+  <section class="bg-smrk">
+    <div class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <SectionLabel>Ze stavby</SectionLabel>
+          <h2 class="mt-3 text-h2 font-bold">Poslední realizace</h2>
+        </div>
+        <a
+          href={site.instagramUrl}
+          rel="noopener"
+          target="_blank"
+          class="inline-flex items-center gap-3 bg-grafit px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-papir transition-colors hover:bg-cihla"
+        >
+          Sledujte nás na Instagramu <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <!-- Po spuštění: komponenta InstagramEmbed (iframe, lazy, consent gate) dle projektového kontextu -->
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          latest.map((p) => (
+            <a href={`/realizace/${p.slug}`} class="group block">
+              <PhotoPlaceholder label={p.title} ratio="aspect-square" />
+              <p class="mt-3 text-sm font-semibold group-hover:text-cihla-dark">{p.title}</p>
+              <p class="text-xs uppercase tracking-[0.15em] text-grafika">{p.location} · {p.year}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Google recenze -->
+  <section class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
+    <div class="flex flex-col items-start justify-between gap-8 border-y border-grafit/10 py-14 lg:flex-row lg:items-center">
+      <div>
+        <SectionLabel>Reference</SectionLabel>
+        <h2 class="mt-3 max-w-xl text-h2 font-bold">Co o nás říkají klienti</h2>
+        <p class="mt-4 max-w-xl text-body text-grafika">
+          Hodnocení našich zakázek najdete na našem Google profilu — nic neupravujeme, recenze píšou sami klienti.
+        </p>
+      </div>
+      <Button href={site.googleProfileUrl} variant="dark" arrow>Přečíst recenze na Google</Button>
+    </div>
+  </section>
+
+  <!-- 8. Nezávazná poptávka (9. kontakty jsou v patičce) -->
+  <CtaSection />
+</Layout>

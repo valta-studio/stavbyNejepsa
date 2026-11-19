@@ -1,0 +1,77 @@
+---
+import { site, branches } from '../data/site';
+import { mainServices } from '../data/services';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-grafit text-papir">
+  <div class="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+    <div>
+      <p class="text-lg font-bold uppercase tracking-tight">
+        Stavby <span class="text-cihla">Nejepša</span>
+      </p>
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-papir/70">
+        {site.claim}. Rodinná stavební firma — stavíme, jako bychom stavěli pro sebe.
+      </p>
+      <a
+        href={site.googleProfileUrl}
+        rel="noopener"
+        target="_blank"
+        class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cihla hover:text-papir"
+      >
+        Recenze na Google profilu <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-papir/50">Služby</p>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {
+          mainServices.map((s) => (
+            <li>
+              <a href={s.path} class="text-papir/80 hover:text-cihla">
+                {s.title}
+              </a>
+            </li>
+          ))
+        }
+        <li><a href="/realizace" class="text-papir/80 hover:text-cihla">Realizace</a></li>
+        <li><a href="/technologie" class="text-papir/80 hover:text-cihla">Technologie</a></li>
+      </ul>
+    </div>
+
+    {
+      branches.map((b) => (
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-papir/50">{b.name}</p>
+          <address class="mt-4 text-sm not-italic leading-relaxed text-papir/80">
+            {b.street}
+            <br />
+            {b.zip} {b.city}
+          </address>
+          <p class="mt-3 text-sm">
+            <a href={`tel:${b.phone.replace(/\s/g, '')}`} class="block text-papir hover:text-cihla" data-track="phone">
+              {b.phone}
+            </a>
+            <a href={`mailto:${b.email}`} class="block text-papir/80 hover:text-cihla" data-track="email">
+              {b.email}
+            </a>
+          </p>
+          <p class="mt-3 text-xs text-papir/50">{b.hours}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="border-t border-papir/10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-xs text-papir/50 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+      <p>© {year} {site.name} · IČO {site.ico}</p>
+      <div class="flex gap-5">
+        <a href={site.instagramUrl} rel="noopener" target="_blank" class="hover:text-papir">Instagram</a>
+        <a href="/kontakt" class="hover:text-papir">Kontakt</a>
+        <a href="/poptavka" class="hover:text-papir">Nezávazná poptávka</a>
+      </div>
+    </div>
+  </div>
+</footer>

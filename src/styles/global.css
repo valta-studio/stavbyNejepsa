@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/*
+  Design tokeny — vychází z design boardu (moodboard F8AqS3):
+  Beton   – hlavní pozadí stránky
+  Papír   – karty, formuláře, menu
+  Grafit  – text, linky, tmavé sekce
+  Cihla   – CTA, akce, hover (ztmaveno z #C2593B kvůli kontrastu 4,5:1 s bílou)
+  Smrk    – světlé alternativní pozadí
+  Grafika – sekundární text, popisky
+*/
+@theme {
+  --color-beton: #e8e6e1;
+  --color-papir: #ffffff;
+  --color-grafit: #111111;
+  --color-cihla: #b84f31;
+  --color-cihla-dark: #a03e20;
+  --color-smrk: #f4f2ed;
+  --color-grafika: #5b5e57;
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: clamp(2.75rem, 7vw, 6rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.02em;
+  --text-h2: clamp(2rem, 4.5vw, 3.5rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h3: 1.75rem;
+  --text-h3--line-height: 1.25;
+  --text-body: 1.125rem;
+  --text-body--line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-beton);
+  color: var(--color-grafit);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Jemný diagonální rastr pro placeholdery fotografií */
+.photo-placeholder {
+  background-color: #d6d3cc;
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0,
+    transparent 14px,
+    rgb(0 0 0 / 0.045) 14px,
+    rgb(0 0 0 / 0.045) 15px
+  );
+}

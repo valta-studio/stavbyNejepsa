@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout title="Stránka nenalezena" description="Stránka nenalezena.">
+  <section class="mx-auto flex max-w-7xl flex-col items-start px-5 py-28 lg:px-8">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-cihla-dark">Chyba 404</p>
+    <h1 class="mt-4 text-display font-bold">Tady nic nestojí</h1>
+    <p class="mt-6 max-w-xl text-body text-grafika">
+      Stránka neexistuje, nebo byla přesunuta. Zkuste úvodní stránku nebo naše realizace.
+    </p>
+    <div class="mt-10 flex flex-wrap gap-4">
+      <Button href="/" arrow>Na úvod</Button>
+      <Button href="/realizace" variant="outline">Realizace</Button>
+    </div>
+  </section>
+</Layout>

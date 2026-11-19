@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { technologies } from '../data/technologies';
+import { projects } from '../data/projects';
+
+function projectsUsing(slug: string) {
+  return projects.filter((p) => p.technologies.includes(slug));
+}
+---
+
+<Layout
+  title="Technologie a materiály"
+  description="Systémy a materiály, se kterými stavíme — zdivo, konstrukční dřevo, hydroizolace, krytiny a zateplovací systémy prověřených výrobců."
+>
+  <section class="mx-auto max-w-7xl px-5 pb-12 pt-16 lg:px-8 lg:pt-24">
+    <SectionLabel>Materiály a systémy</SectionLabel>
+    <h1 class="mt-4 text-display font-bold">Technologie</h1>
+    <p class="mt-6 max-w-2xl text-body text-grafika">
+      Nestavíme z toho, co je zrovna po ruce. Používáme systémová řešení prověřených výrobců —
+      a u každé technologie vidíte, na kterých našich stavbách ji najdete.
+    </p>
+  </section>
+
+  <section class="mx-auto max-w-7xl space-y-6 px-5 pb-24 lg:px-8">
+    {
+      technologies.map((t, i) => {
+        const used = projectsUsing(t.slug);
+        return (
+          <div class="grid gap-8 bg-papir p-8 lg:grid-cols-[1fr_2fr_1fr] lg:p-10">
+            <div>
+              <span class="text-3xl font-light tabular-nums text-cihla-dark">{String(i + 1).padStart(2, '0')}</span>
+              <h2 class="mt-3 text-h3 font-bold">{t.name}</h2>
+              <p class="mt-2 text-xs font-semibold uppercase tracking-[0.15em] text-grafika">{t.partner}</p>
+            </div>
+            <div>
+              <p class="text-body text-grafika">{t.description}</p>
+              <p class="mt-4 text-sm font-semibold uppercase tracking-[0.12em] text-cihla-dark">{t.usedFor}</p>
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">Kde ji používáme</p>
+              {used.length > 0 ? (
+                <ul class="mt-3 space-y-2">
+                  {used.map((p) => (
+                    <li>
+                      <a href={`/realizace/${p.slug}`} class="text-sm font-semibold hover:text-cihla-dark">
+                        {p.title} <span aria-hidden="true">→</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="mt-3 text-sm text-grafika">Fotografie z realizací doplníme.</p>
+              )}
+            </div>
+          </div>
+        );
+      })
+    }
+  </section>
+
+  <CtaSection />
+</Layout>
