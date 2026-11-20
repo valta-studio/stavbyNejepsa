@@ -110,6 +110,17 @@ const bodies: Record<string, RichTextBlock[]> = {
         'Zachováno 100 % vzrostlých borovic na pozemku',
       ],
     },
+    { _type: 'block', style: 'h2', text: 'Uvažujete o podobném domě?' },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Domů jako tento stavíme jen několik do roka — záměrně. Individuální architektura si žádá tesaře, kteří u detailu zpomalí, a stavbyvedoucího, který má na vás čas, ne třicet rozestavěných projektů. Pokud hledáte dodavatele, který postaví tisící katalogový dům, nebudeme pro vás ta pravá volba.',
+    },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Pokud ale máte pozemek s charakterem a představu, která si zaslouží víc než typový projekt, rádi se s vámi potkáme — klidně přímo na místě. Od první konzultace po předání klíčů jednáte s jedním člověkem, diskrétně a bez prostředníků. Reference z podobných staveb vám ukážeme osobně, včetně kontaktů na majitele, kteří o svém domě rádi mluví.',
+    },
   ],
 
   'rodinny-dum-beroun': [
@@ -198,6 +209,17 @@ const bodies: Record<string, RichTextBlock[]> = {
         'Jediná vícepráce: terasa na přání klienta',
         'Energetická třída B',
       ],
+    },
+    { _type: 'block', style: 'h2', text: 'Uvažujete o vlastním domě?' },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Nejdražší, co do stavby vložíte, nejsou peníze — je to váš čas a klid. Naši klienti jsou lidé, kteří řídí firmy a rodiny; nemají prostor dohadovat se s pěti subdodavateli a trávit soboty na kontrolních dnech. Proto dostávají jeden kontakt, jeden harmonogram a rozpočet, který na konci souhlasí s tím na začátku.',
+    },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Zděný dům na klíč od nás není kompromis mezi cenou a kvalitou — je to kvalita s předem známou cenou. Přijeďte se podívat na rozestavěné i hotové domy; nejlépe se rozhoduje tam, kde si můžete na řemeslo sáhnout.',
     },
   ],
 
@@ -294,6 +316,17 @@ const bodies: Record<string, RichTextBlock[]> = {
         'Nulový počet stížností v obydleném domě',
       ],
     },
+    { _type: 'block', style: 'h2', text: 'Vlastníte byt s historií?' },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Prvorepublikový byt není nemovitost, je to rodinné stříbro — a rekonstrukce je okamžik, kdy se dá znásobit, nebo nenávratně pokazit. Pracujeme pro klienty, kteří to vědí: právníky, lékaře, majitele firem, kteří kupují byty na Vinohradech, v Dejvicích či v Bubenči a chtějí řemeslo na úrovni adresy.',
+    },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Celou rekonstrukci vedeme diskrétně a bez vašeho každodenního dohledu — dostanete jedno rozhodnutí týdně, fotoreport z průběhu a termín, který platí. Hodnotu, kterou do bytu vložíte, uvidíte v odhadu i v tom, jak se v něm bydlí.',
+    },
   ],
 
   'plocha-strecha-kladno': [
@@ -376,6 +409,17 @@ const bodies: Record<string, RichTextBlock[]> = {
         'Úspora na vytápění horních pater ~15 %',
         'Záruka: 5 let na práci, 30 let na materiál',
       ],
+    },
+    { _type: 'block', style: 'h2', text: 'Spravujete nemovitost?' },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Střecha je pojistka hodnoty celého domu — a její selhání je nejdražší havárie, jaká vás může potkat. Pracujeme pro SVJ, rodinné investory i majitele činžovních domů, kteří nechtějí každé tři roky řešit další záplatu, ale jedno definitivní řešení s garancí a servisem.',
+    },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Nabídku od nás dostanete postavenou na sondách, ne na odhadu z chodníku. A s ní i protokoly, revizní plán a jedno telefonní číslo, které platí i pět let po předání.',
     },
   ],
 
@@ -461,6 +505,17 @@ const bodies: Record<string, RichTextBlock[]> = {
         'Bydlení bez přerušení po celou dobu prací',
       ],
     },
+    { _type: 'block', style: 'h2', text: 'Řešíte střechu nad hlavou — doslova?' },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Dobrá střecha se dědí. Ta naše v Dobříši přežije svého majitele i jeho děti — betonová krytina, titanzinek a krov z certifikovaného dřeva nejsou marketingová slova, ale materiály s životností přes padesát let. Pro dům, který má v rodině zůstat, je to nejrozumnější investice, jakou lze do nemovitosti vložit.',
+    },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Posouzení stavu krovu a zaměření děláme zdarma a říkáme věci narovinu — i tehdy, když je levnější oprava lepší volbou než výměna. Právě proto se k nám klienti vracejí s dalším domem v rodině.',
+    },
   ],
 
   'zatepleni-pribram': [
@@ -543,6 +598,17 @@ const bodies: Record<string, RichTextBlock[]> = {
         'Spotřeba plynu −40 % první zimu',
         'Dotace NZÚ ≈ třetina nákladů',
       ],
+    },
+    { _type: 'block', style: 'h2', text: 'Váš dům si zaslouží víc než nejlevnější nabídku' },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Zateplení nabízí dnes každý, kdo unese kbelík lepidla. Rozdíl se pozná za deset let — na parapetech, soklu a rozích, tedy přesně tam, kde jsme v Příbrami strávili nejvíc času. Pokud vlastníte dům, který plánujete předat dětem, vybírejte firmu podle detailů, ne podle ceny za metr.',
+    },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'K zateplení od nás dostanete výpočet návratnosti, vyřízenou dotaci a fasádu, za kterou se nebudete muset omlouvat ani sousedům, ani odhadci. Zaměření a konzultace s energetickým specialistou je u nás samozřejmost, ne příplatek.',
     },
   ],
 
@@ -632,6 +698,17 @@ const bodies: Record<string, RichTextBlock[]> = {
         'Rovinnost pláště ±2 mm na 2m lati',
         'Údržba: oplach vodou jednou za několik let',
       ],
+    },
+    { _type: 'block', style: 'h2', text: 'Reprezentuje vaše budova vaši firmu?' },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Fasáda je oblek vaší nemovitosti — a nájemci i obchodní partneři ji čtou dřív, než vejdou do dveří. Provětrávaný plášť z cementovláknitých desek je volba pro vlastníky, kteří počítají hodnotu aktiva na desetiletí: neblednoucí materiál, nulová údržba a technický detail, který obstojí i před architektem protistrany.',
+    },
+    {
+      _type: 'block',
+      style: 'normal',
+      text: 'Umíme realizovat za plného provozu budovy a s kladečským plánem, který schválíte dřív, než se dotkneme fasády. Výsledek si můžete prohlédnout osobně — rádi vás na referenční budovu vezmeme.',
     },
   ],
 };
