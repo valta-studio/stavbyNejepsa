@@ -5,7 +5,9 @@ import Button from '../../components/Button.astro';
 import PhotoPlaceholder from '../../components/PhotoPlaceholder.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import CtaSection from '../../components/CtaSection.astro';
+import RichText from '../../components/RichText.astro';
 import { projects, type Project } from '../../data/projects';
+import { getProjectBody } from '../../data/projectBodies';
 import { getTechnology } from '../../data/technologies';
 
 export function getStaticPaths() {
@@ -17,6 +19,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const body = getProjectBody(project.slug);
 const techs = project.technologies.map(getTechnology).filter((t) => t !== undefined);
 const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
 
@@ -68,7 +71,12 @@ const posterSrc = getPhoto(`project-${project.slug}`)?.src;
         </div>
       </dl>
 
-      <p class="mt-8 max-w-2xl text-body text-grafika">{project.description}</p>
+      <p class="mt-8 max-w-2xl text-h3 font-medium leading-snug">{project.description}</p>
+
+      <!-- Rich text ze struktury Portable Text (po napojení Sanity = project.body) -->
+      <div class="mt-6 max-w-4xl">
+        <RichText blocks={body} />
+      </div>
     </section>
 
     <!-- Postup realizace od začátku do konce -->
