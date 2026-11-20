@@ -13,10 +13,21 @@ interface Props {
   description: string;
   // 'overlay' = stránka začíná fullscreen fotkou (header přes ni), 'light' = obsahová stránka na betonu
   headerVariant?: 'overlay' | 'light';
+  // OG/sociální náhled — cesta v /public nebo absolutní URL; výchozí karta 1200×630
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
-const { title, description, headerVariant = 'light' } = Astro.props;
+const {
+  title,
+  description,
+  headerVariant = 'light',
+  ogImage = '/og-default.jpg',
+  ogImageAlt = `${site.shortName} – ${site.claim}`,
+} = Astro.props;
 const fullTitle = `${title} | ${site.shortName}`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
 ---
 
 <!doctype html>
@@ -26,12 +37,22 @@ const fullTitle = `${title} | ${site.shortName}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="cs_CZ" />
-    <!-- TODO: favicon set + OG image šablona z vektorového loga -->
+    <meta property="og:site_name" content={site.shortName} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <!-- TODO: favicon set; OG karta zatím s textovým logem — po dodání vektorového loga přegenerovat -->
   </head>
   <body class="flex min-h-screen flex-col">
     <Header variant={headerVariant} />
