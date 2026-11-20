@@ -31,10 +31,33 @@
   --text-h3--line-height: 1.25;
   --text-body: 1.125rem;
   --text-body--line-height: 1.6;
+
+  /* Jemné přikývnutí scroll indikátoru — plynulý ease-out místo bounce */
+  --animate-nudge: nudge 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  @keyframes nudge {
+    0%, 70%, 100% { transform: translateY(0); }
+    35% { transform: translateY(5px); }
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Viditelný fokus z klávesnice — currentColor drží kontrast na světlém i tmavém */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+::placeholder {
+  color: var(--color-grafika);
+  opacity: 1;
 }
 
 /* Obrysový display titulek přes fotku (vzor „4kk“ z moodboardu) */
@@ -66,4 +89,11 @@ body {
     rgb(0 0 0 / 0.045) 14px,
     rgb(0 0 0 / 0.045) 15px
   );
+}
+
+/* Logo značka na světlém pozadí: žlutá výplň + tenká grafitová kontura (čitelnost na betonu) */
+.logo-mark-outline path {
+  stroke: var(--color-grafit);
+  stroke-width: 2.5;
+  paint-order: stroke;
 }

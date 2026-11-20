@@ -1,0 +1,13 @@
+---
+// Značka Stavby Nejepsa — dvě protiběžné „závorky“ (vektorizováno z rastrového loga).
+// Barva přes currentColor, výchozí je hlavní žlutá.
+interface Props {
+  class?: string;
+}
+const { class: className = 'text-zluta' } = Astro.props;
+---
+
+<svg class={className} viewBox="0 0 136 96" fill="currentColor" aria-hidden="true" focusable="false">
+  <path d="M0 0H54V14H12V82H44A30 30 0 0 1 74 52H82V68A28 28 0 0 0 54 96H0Z" />
+  <path d="M0 0H54V14H12V82H44A30 30 0 0 1 74 52H82V68A28 28 0 0 0 54 96H0Z" transform="rotate(180 68 48)" />
+</svg>

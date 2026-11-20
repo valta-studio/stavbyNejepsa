@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-20T00:00:00Z",
+  "title": "Design System: Stavby Nejepsa",
+  "extensions": {
+    "colorMeta": {
+      "zluta": {
+        "role": "primary",
+        "displayName": "Stavební žlutá",
+        "canonical": "#f7d048",
+        "tonalRamp": ["oklch(22% 0.05 92)", "oklch(34% 0.08 92)", "oklch(47% 0.11 92)", "oklch(60% 0.13 92)", "oklch(73% 0.14 92)", "oklch(86% 0.145 92)", "oklch(92% 0.1 92)", "oklch(96% 0.05 92)"]
+      },
+      "zluta-dark": {
+        "role": "primary",
+        "displayName": "Okrová",
+        "canonical": "#735800",
+        "tonalRamp": ["oklch(18% 0.04 88)", "oklch(28% 0.07 88)", "oklch(38% 0.09 88)", "oklch(47% 0.105 88)", "oklch(58% 0.11 88)", "oklch(70% 0.1 88)", "oklch(82% 0.08 88)", "oklch(93% 0.04 88)"]
+      },
+      "grafit": {
+        "role": "neutral",
+        "displayName": "Grafit",
+        "canonical": "#111111",
+        "tonalRamp": ["oklch(13% 0 0)", "oklch(17% 0 0)", "oklch(28% 0 0)", "oklch(40% 0 0)", "oklch(55% 0 0)", "oklch(70% 0 0)", "oklch(85% 0 0)", "oklch(95% 0 0)"]
+      },
+      "beton": {
+        "role": "neutral",
+        "displayName": "Beton",
+        "canonical": "#e4e2dd",
+        "tonalRamp": ["oklch(20% 0.004 90)", "oklch(32% 0.005 90)", "oklch(45% 0.006 90)", "oklch(58% 0.007 90)", "oklch(70% 0.008 90)", "oklch(80% 0.008 90)", "oklch(91% 0.007 90)", "oklch(96% 0.004 90)"]
+      },
+      "papir": {
+        "role": "neutral",
+        "displayName": "Papír",
+        "canonical": "#ffffff",
+        "tonalRamp": ["oklch(20% 0 0)", "oklch(35% 0 0)", "oklch(50% 0 0)", "oklch(65% 0 0)", "oklch(78% 0 0)", "oklch(88% 0 0)", "oklch(95% 0 0)", "oklch(100% 0 0)"]
+      },
+      "smrk": {
+        "role": "neutral",
+        "displayName": "Smrk",
+        "canonical": "#f4f2ed",
+        "tonalRamp": ["oklch(20% 0.005 95)", "oklch(33% 0.006 95)", "oklch(46% 0.007 95)", "oklch(59% 0.008 95)", "oklch(71% 0.009 95)", "oklch(82% 0.009 95)", "oklch(90% 0.008 95)", "oklch(96% 0.006 95)"]
+      },
+      "grafika": {
+        "role": "neutral",
+        "displayName": "Grafika",
+        "canonical": "#5b5e57",
+        "tonalRamp": ["oklch(16% 0.008 130)", "oklch(25% 0.01 130)", "oklch(35% 0.011 130)", "oklch(45% 0.012 130)", "oklch(57% 0.012 130)", "oklch(70% 0.01 130)", "oklch(83% 0.008 130)", "oklch(94% 0.005 130)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "H1 stránek a hero titulky; přes fotografii zčásti obrysově (2px stroke)." },
+      "headline": { "displayName": "Headline (H2)", "purpose": "Titulky sekcí, token text-h2." },
+      "title": { "displayName": "Title (H3)", "purpose": "Titulky bloků (700) a zvýrazněný lead odstavec (500), token text-h3." },
+      "body": { "displayName": "Body", "purpose": "Běžný text, token text-body; šířku drží max-w-xl/max-w-3xl." },
+      "label": { "displayName": "Label", "purpose": "Štítky a popisky: VERZÁLKY, prostrkání 0.1–0.2em podle kontextu." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "duration-interaction", "value": "200ms", "purpose": "Barevná přepnutí ploch (transition-colors) a posun šipky při hoveru." },
+      { "name": "duration-panel", "value": "300ms", "purpose": "Vyjetí menu panelu (translate) a zatmavení pozadí (opacity)." },
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Výchozí easing všech přechodů (Tailwind default)." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Tlačítko — solid",
+      "kind": "button",
+      "refersTo": "button-solid",
+      "description": "Primární CTA: žlutá plocha, grafitový text, šipka; hover přepne do grafitu.",
+      "html": "<a class=\"ds-btn-solid\" href=\"#\">Nezávazná poptávka <span aria-hidden=\"true\" class=\"ds-btn-arrow\">→</span></a>",
+      "css": ".ds-btn-solid { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 28px; background: #f7d048; color: #111111; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: background-color 0.2s, color 0.2s; } .ds-btn-solid:hover { background: #111111; color: #ffffff; } .ds-btn-solid:focus-visible { outline: 2px solid #111111; outline-offset: 2px; } .ds-btn-arrow { font-size: 1rem; line-height: 1; }"
+    },
+    {
+      "name": "Tlačítko — outline",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Sekundární akce: 1px grafitový obrys; hover zalije žlutou.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Realizace</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 28px; background: transparent; border: 1px solid #111111; color: #111111; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: background-color 0.2s, border-color 0.2s; } .ds-btn-outline:hover { border-color: #f7d048; background: #f7d048; } .ds-btn-outline:focus-visible { outline: 2px solid #111111; outline-offset: 2px; }"
+    },
+    {
+      "name": "Tlačítko — dark",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "Grafitová varianta pro světlé podklady; hover přepne do žluté.",
+      "html": "<a class=\"ds-btn-dark\" href=\"#\">Poslat poptávku <span aria-hidden=\"true\" class=\"ds-btn-arrow\">→</span></a>",
+      "css": ".ds-btn-dark { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 28px; background: #111111; color: #ffffff; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; transition: background-color 0.2s, color 0.2s; } .ds-btn-dark:hover { background: #f7d048; color: #111111; } .ds-btn-dark:focus-visible { outline: 2px solid #111111; outline-offset: 2px; } .ds-btn-arrow { font-size: 1rem; line-height: 1; }"
+    },
+    {
+      "name": "Sekční štítek",
+      "kind": "chip",
+      "refersTo": "label",
+      "description": "Verzálkový štítek nad titulkem sekce; žlutý na grafitu a fotkách, okrový na světlém podkladu.",
+      "html": "<div class=\"ds-label-demo\"><p class=\"ds-section-label\">Pojďme stavět</p><h2 class=\"ds-label-heading\">Nezávazná poptávka</h2></div>",
+      "css": ".ds-label-demo { background: #111111; padding: 24px 28px; } .ds-section-label { margin: 0; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: #f7d048; } .ds-label-heading { margin: 12px 0 0; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; font-size: 1.75rem; font-weight: 700; line-height: 1.25; color: #ffffff; }"
+    },
+    {
+      "name": "Štítek realizace",
+      "kind": "custom",
+      "refersTo": "zluta",
+      "description": "Podpis systému: žlutý štítek s číslem a názvem přišpendlený k levému dolnímu rohu fotografie realizace.",
+      "html": "<div class=\"ds-plaque-photo\"><span class=\"ds-plaque\"><span class=\"ds-plaque-num\">01</span> Villa za Prahou</span></div>",
+      "css": ".ds-plaque-photo { position: relative; height: 150px; background: #5b5e57; background-image: repeating-linear-gradient(135deg, transparent 0, transparent 14px, rgb(0 0 0 / 0.1) 14px, rgb(0 0 0 / 0.1) 15px); overflow: visible; } .ds-plaque { position: absolute; bottom: 0; left: 24px; display: inline-flex; align-items: center; gap: 12px; background: #f7d048; color: #111111; padding: 12px 20px; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; transition: background-color 0.2s, color 0.2s; } .ds-plaque-photo:hover .ds-plaque { background: #111111; color: #ffffff; } .ds-plaque-num { font-weight: 300; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Číslovaná karta",
+      "kind": "card",
+      "refersTo": "papir",
+      "description": "Karta služby: velké světlé číslo, titulek, text, šipka u dolní hrany; hover přepne celou kartu do grafitu.",
+      "html": "<a class=\"ds-numbered-card\" href=\"#\"><span class=\"ds-card-num\">01</span><h3 class=\"ds-card-title\">Rodinné domy na klíč</h3><p class=\"ds-card-text\">Dřevostavby i zděné domy od základové desky po předání klíčů.</p><span aria-hidden=\"true\" class=\"ds-card-arrow\">→</span></a>",
+      "css": ".ds-numbered-card { display: flex; flex-direction: column; min-height: 260px; padding: 28px; background: #ffffff; color: #111111; text-decoration: none; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; transition: background-color 0.2s, color 0.2s; } .ds-numbered-card:hover { background: #111111; color: #ffffff; } .ds-card-num { font-size: 1.875rem; font-weight: 300; font-variant-numeric: tabular-nums; line-height: 1.2; } .ds-card-title { margin: 20px 0 0; font-size: 1.25rem; font-weight: 700; line-height: 1.375; } .ds-card-text { margin: 12px 0 0; font-size: 0.875rem; line-height: 1.625; opacity: 0.8; } .ds-card-arrow { margin-top: auto; padding-top: 24px; font-size: 1.5rem; line-height: 1; transition: transform 0.2s; } .ds-numbered-card:hover .ds-card-arrow { transform: translateX(6px); }"
+    },
+    {
+      "name": "Formulářové pole",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Verzálkový popisek nad polem; 1px obrys grafit/20, focus ztmavne na plný grafit.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-name\">Jméno a příjmení *</label><input class=\"ds-field-input\" id=\"ds-name\" type=\"text\" placeholder=\"Jan Novák\" /></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 8px; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; } .ds-field-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: #111111; } .ds-field-input { background: #ffffff; border: 1px solid rgb(17 17 17 / 0.2); border-radius: 0; padding: 12px 16px; font-family: inherit; font-size: 1.125rem; line-height: 1.6; color: #111111; outline: none; transition: border-color 0.2s; } .ds-field-input:focus { border-color: #111111; } .ds-field-input::placeholder { color: #5b5e57; }"
+    },
+    {
+      "name": "Tlačítko Menu",
+      "kind": "nav",
+      "refersTo": "papir",
+      "description": "Papírový blok v pravém horním rohu s trojicí linek; hover zalije žlutou.",
+      "html": "<button class=\"ds-menu-btn\" type=\"button\">Menu <span aria-hidden=\"true\" class=\"ds-menu-lines\"><span></span><span></span><span></span></span></button>",
+      "css": ".ds-menu-btn { display: inline-flex; align-items: center; gap: 12px; background: #ffffff; border: none; padding: 20px 24px; font-family: Poppins, ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #111111; cursor: pointer; transition: background-color 0.2s; } .ds-menu-btn:hover { background: #f7d048; } .ds-menu-btn:focus-visible { outline: 2px solid #111111; outline-offset: 2px; } .ds-menu-lines { display: flex; flex-direction: column; gap: 4px; } .ds-menu-lines span { display: block; height: 2px; width: 20px; background: currentColor; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Stavba podle výkresu",
+    "overview": "Web se chová jako technický výkres položený na stavební materiály. Barvy nejsou dekorace, ale materiály: beton jako podklad stránky, papír jako karty a formuláře, grafit jako text a tmavé sekce, stavební žlutá jako značení akce. Obrysové display titulky přes fotografie jsou čáry z výkresu, číslované karty a tabulární číslice jsou položky z rozpočtu. Všechno sedí na přesném rastru, nic se nevznáší — žádné stíny, žádné zaoblení, žádná výplň navíc.\n\nTón je poctivý, přímý a pracovní, zároveň sebevědomý, ostrý a moderní. Hierarchii nesou velké tučné titulky Poppins se záporným prostrkáním a fotografie realizací přes celou šířku; drobné verzálkové štítky s širokým prostrkáním fungují jako razítka na výkresu. Interakce jsou pevné a přímé: celá plocha prvku je klikací a při hoveru kontrastně přepne barvy (žlutá ↔ grafit), šipka → se posune. Žádné jemné přechody průhlednosti, žádné nadnášení.\n\nVizuální anti-reference (potvrzeno): generická korporátní stavební šablona (modrá/šedá, stock fotky, kulaté karty) a přeplácanost (badge, ikonkové gridy, carousely s tečkami, dekorativní ilustrace).",
+    "keyCharacteristics": [
+      "Materiálová paleta: beton, papír, grafit, smrk — a stavební žlutá jen pro akci a zvýraznění",
+      "Striktně plochý systém: nulové stíny, hloubka jen vrstvením barevných ploch a fotografií",
+      "Ostré hrany všude; jediná výjimka jsou kruhová ikonová tlačítka",
+      "Obrysové display titulky (2px stroke) přes fotografie",
+      "Celá plocha prvku reaguje na hover kontrastním přepnutím barev",
+      "Šipka → jako jednotný ukazatel akce, verzálkové štítky s prostrkáním jako razítka"
+    ],
+    "rules": [
+      { "name": "Pravidlo černé na žluté", "body": "Na žluté ploše je vždy grafitový text, nikdy bílý. Žlutá jako text smí jen na grafit nebo fotografii; na světlém podkladu ji vždy nahrazuje okrová (#735800).", "section": "colors" },
+      { "name": "Pravidlo značení", "body": "Žlutá značí akci nebo klíčovou informaci (CTA, štítek, linka, akcent) — nikdy není výplňové pozadí celé sekce.", "section": "colors" },
+      { "name": "Pravidlo obrysu", "body": "Obrysový titulek (průhledná výplň, 2px stroke papír/grafit) patří výhradně na display velikost přes fotografii; na plném barevném podkladu se nepoužívá.", "section": "typography" },
+      { "name": "Pravidlo tabulárních číslic", "body": "Pořadová čísla (karty, štítky realizací) se sází ve váze 300–400 s tabular-nums, vždy světlejší než titulek vedle nich.", "section": "typography" },
+      { "name": "Pravidlo bez stínů", "body": "Žádné stíny, nikdy. Pokud prvek potřebuje oddělit od podkladu, dostane jinou materiálovou barvu (papír na betonu, grafit na papíru), ne stín.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do používej materiálové vrstvení místo stínů: papír na betonu, grafit na papíru, smrk jako alternativní pás.",
+      "Do dávej na žlutou plochu vždy grafitový text a žlutý text na světlém podkladu vždy překládej do okrové (#735800); drž kontrast ≥ 4,5:1.",
+      "Do nech celou plochu prvku reagovat na hover kontrastním přepnutím barev (žlutá ↔ grafit) za 200ms.",
+      "Do sázej akci se šipkou → a štítky verzálkami s prostrkáním 0.1–0.2em.",
+      "Do pokládej fotografie na plnou šířku s grafitovým gradientem a obrysovým display titulkem."
+    ],
+    "donts": [
+      "Don't nepřidávej stíny, zaoblené rohy (mimo kruhová ikonová tlačítka) ani gradientní dekorace — systém je striktně plochý a ostrý.",
+      "Don't nesklouzávej ke generické korporátní stavební šabloně: žádná firemní modrá, stock fotografie ani kulaté karty s ikonkami.",
+      "Don't nepřeplácávej: žádné badge, ikonkové gridy, carousely s tečkami ani dekorativní ilustrace; výraz nesou fotografie, typografie a žlutá.",
+      "Don't nepoužívej žlutou jako výplňové pozadí celých sekcí ani jako text na betonu či papíru.",
+      "Don't nezaváděj druhé písmo ani systémový display font — celý web mluví jen Poppinsem."
+    ]
+  }
+}

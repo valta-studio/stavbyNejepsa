@@ -6,3 +6,5 @@ dist/
 .env.*
 .DS_Store
 .context/
+.claude/settings.local.json
+.impeccable/config.local.json

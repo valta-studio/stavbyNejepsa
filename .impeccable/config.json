@@ -1,0 +1,23 @@
+{
+  "detector": {
+    "extensions": [
+      {
+        "ext": ".astro",
+        "engine": "html"
+      }
+    ],
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/PhotoPlaceholder.astro"
+        ],
+        "createdAt": "2026-11-20T20:58:42.136Z",
+        "reason": "zamerny fallback pro fotky dodavane klientem: renderuje div s role=img a popiskem, zadny img bez src"
+      }
+    ]
+  }
+}

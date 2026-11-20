@@ -11,6 +11,7 @@ interface Props {
   fill?: boolean; // absolutně vyplní rodiče (fullscreen hero slidy)
   name?: string; // název souboru v src/assets/photos (bez přípony)
   eager?: boolean; // LCP obrázek: eager + fetchpriority=high
+  sizes?: string; // skutečná šířka slotu v layoutu — řídí výběr kandidáta z widths
   class?: string;
 }
 const {
@@ -19,6 +20,7 @@ const {
   fill = false,
   name,
   eager = false,
+  sizes = '100vw',
   class: className = '',
 } = Astro.props;
 
@@ -34,7 +36,7 @@ const sizing = fill ? 'absolute inset-0 h-full w-full' : `relative ${ratio} w-fu
         alt={label}
         class="h-full w-full object-cover"
         widths={[480, 800, 1344]}
-        sizes="(min-width: 1024px) 100vw, 100vw"
+        sizes={sizes}
         loading={eager ? 'eager' : 'lazy'}
         fetchpriority={eager ? 'high' : undefined}
         decoding={eager ? undefined : 'async'}
@@ -42,7 +44,7 @@ const sizing = fill ? 'absolute inset-0 h-full w-full' : `relative ${ratio} w-fu
     </div>
   ) : (
     <div class={`photo-placeholder ${sizing} overflow-hidden ${className}`} role="img" aria-label={label}>
-      <span class="absolute inset-0 flex items-center justify-center p-4 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-grafika">
+      <span class="absolute inset-0 flex items-center justify-center p-4 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-grafit/70">
         {label}
       </span>
     </div>

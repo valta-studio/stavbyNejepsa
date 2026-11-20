@@ -2,6 +2,7 @@
 // Fixní logo vlevo + tlačítko „Menu“ vpravo, navigace jako overlay panel zprava.
 // Varianta 'overlay' = bílé logo přes fotku, 'light' = grafitové logo na betonu.
 import Button from './Button.astro';
+import LogoMark from './LogoMark.astro';
 import { site } from '../data/site';
 import { services } from '../data/services';
 
@@ -24,14 +25,18 @@ const groups = services
 const logoColor = variant === 'overlay' ? 'text-papir' : 'text-grafit';
 // Žlutý akcent loga jen přes fotku — na světlém pozadí by byl nečitelný
 const logoAccent = variant === 'overlay' ? 'text-zluta' : 'text-grafit';
+// Značka je vždy v hlavní žluté; na světlém pozadí s tenkou grafitovou konturou kvůli čitelnosti
+const logoMarkColor = variant === 'overlay' ? 'text-zluta' : 'text-zluta logo-mark-outline';
 ---
 
 <div class="pointer-events-none fixed inset-x-0 top-0 z-50">
   <div class="flex items-center justify-between">
-    <a href="/" class={`pointer-events-auto mx-5 lg:mx-8 ${logoColor}`} aria-label={site.name}>
-      <!-- TODO: nahradit SVG lockupem z vektorového loga -->
-      <span class="block text-xl font-bold uppercase leading-none tracking-tight">Stavby</span>
-      <span class={`block text-xl font-bold uppercase leading-none tracking-tight ${logoAccent}`}>Nejepsa</span>
+    <a href="/" class={`pointer-events-auto mx-5 flex items-center gap-3 lg:mx-8 ${logoColor}`} aria-label={site.name}>
+      <LogoMark class={`h-10 w-auto shrink-0 ${logoMarkColor}`} />
+      <span>
+        <span class="block text-xl font-bold uppercase leading-none tracking-tight">Stavby</span>
+        <span class={`block text-xl font-bold uppercase leading-none tracking-tight ${logoAccent}`}>Nejepsa</span>
+      </span>
     </a>
     <button
       id="menu-open"
@@ -113,6 +118,10 @@ const logoAccent = variant === 'overlay' ? 'text-zluta' : 'text-grafit';
   const openBtn = document.getElementById('menu-open');
   const closeBtn = document.getElementById('menu-close');
 
+  function isOpen() {
+    return root?.getAttribute('aria-hidden') === 'false';
+  }
+
   function setOpen(open: boolean) {
     if (!root || !panel || !backdrop) return;
     root.classList.toggle('invisible', !open);
@@ -121,12 +130,31 @@ const logoAccent = variant === 'overlay' ? 'text-zluta' : 'text-grafit';
     backdrop.classList.toggle('opacity-0', !open);
     openBtn?.setAttribute('aria-expanded', String(open));
     document.documentElement.style.overflow = open ? 'hidden' : '';
+    // Fokus z klávesnice: do panelu při otevření, zpět na spouštěč při zavření
+    if (open) closeBtn?.focus();
+    else openBtn?.focus();
   }
 
   openBtn?.addEventListener('click', () => setOpen(true));
   closeBtn?.addEventListener('click', () => setOpen(false));
   backdrop?.addEventListener('click', () => setOpen(false));
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setOpen(false);
+    if (e.key === 'Escape' && isOpen()) setOpen(false);
+  });
+
+  // Tab zůstává uvnitř otevřeného panelu
+  panel?.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab' || !isOpen()) return;
+    const focusables = panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled])');
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   });
 </script>

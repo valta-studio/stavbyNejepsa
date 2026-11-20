@@ -62,7 +62,7 @@ import { mainServices } from '../data/services';
           <div class="flex flex-col gap-2 sm:col-span-2">
             <label for="service" class="text-xs font-semibold uppercase tracking-[0.15em]">Co poptáváte</label>
             <select id="service" name="service"
-              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-grafit">
+              class="appearance-none rounded-none border border-grafit/20 bg-papir bg-[url('data:image/svg+xml;utf8,<svg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2212%22%20height=%228%22%20viewBox=%220%200%2012%208%22><path%20d=%22M1%201l5%205%205-5%22%20fill=%22none%22%20stroke=%22%23111111%22%20stroke-width=%222%22/></svg>')] bg-[length:12px_8px] bg-[position:right_1rem_center] bg-no-repeat px-4 py-3 pr-10 text-body outline-none focus:border-grafit">
               <option value="">— Vyberte službu —</option>
               {mainServices.map((s) => <option value={s.slug}>{s.title}</option>)}
               <option value="jine">Jiné / nevím</option>
@@ -86,7 +86,7 @@ import { mainServices } from '../data/services';
         <input type="hidden" name="utm" id="utm" />
 
         <label class="mt-6 flex items-start gap-3 text-sm text-grafika">
-          <input type="checkbox" required class="mt-1 accent-[#b84f31]" />
+          <input type="checkbox" required class="mt-1 accent-zluta-dark" />
           <span>Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky. *</span>
         </label>
 

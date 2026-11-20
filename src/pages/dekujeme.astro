@@ -9,9 +9,12 @@ import { site } from '../data/site';
 <Layout title="Děkujeme za poptávku" description="Vaši poptávku jsme přijali. Ozveme se do dvou pracovních dnů.">
   <section class="mx-auto flex max-w-7xl flex-col items-start px-5 py-28 lg:px-8">
     <SectionLabel>Poptávka odeslána</SectionLabel>
-    <h1 class="mt-4 max-w-3xl text-display font-bold">Děkujeme, ozveme se do dvou pracovních dnů</h1>
-    <p class="mt-6 max-w-2xl text-body text-grafika">
-      Vaši poptávku jsme přijali. Pokud spěcháte, zavolejte nám přímo na
+    <h1 class="mt-4 text-display font-bold">Děkujeme</h1>
+    <p class="mt-6 max-w-2xl text-h3 font-medium leading-snug">
+      Vaši poptávku jsme přijali — ozveme se do dvou pracovních dnů.
+    </p>
+    <p class="mt-4 max-w-2xl text-body text-grafika">
+      Pokud spěcháte, zavolejte nám přímo na
       <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="font-semibold text-zluta-dark underline underline-offset-4 hover:text-grafit" data-track="phone">
         {site.phone}
       </a>.
