@@ -80,9 +80,19 @@ const posterSrc = getPhoto(`project-${project.slug}`)?.src;
           <dt class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">Rok</dt>
           <dd class="mt-1 text-lg font-semibold">{project.year}</dd>
         </div>
-        <div>
+        <div class="basis-full sm:basis-auto">
           <dt class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">Rozsah prací</dt>
-          <dd class="mt-1 text-lg font-semibold">{project.scope.join(' · ')}</dd>
+          <!-- Mobil: položka na řádek bez teček; od sm v řádku oddělené „·“ -->
+          <dd class="mt-1 text-lg font-semibold">
+            {
+              project.scope.map((item, i) => (
+                <>
+                  {i > 0 && <span aria-hidden="true" class="hidden sm:inline"> · </span>}
+                  <span class="block sm:inline">{item}</span>
+                </>
+              ))
+            }
+          </dd>
         </div>
       </dl>
 
