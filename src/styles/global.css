@@ -5,16 +5,17 @@
   Beton   – hlavní pozadí stránky
   Papír   – karty, formuláře, menu
   Grafit  – text, linky, tmavé sekce
-  Cihla   – CTA, akce, hover (ztmaveno z #C2593B kvůli kontrastu 4,5:1 s bílou)
+  Žlutá   – CTA, akcent; na žluté vždy černý text
+  Žlutá dark – žlutý akcent jako text na světlém pozadí (okrová kvůli kontrastu ≥ 4,5:1)
   Smrk    – světlé alternativní pozadí
   Grafika – sekundární text, popisky
 */
 @theme {
-  --color-beton: #e8e6e1;
+  --color-beton: #e4e2dd;
   --color-papir: #ffffff;
   --color-grafit: #111111;
-  --color-cihla: #b84f31;
-  --color-cihla-dark: #a03e20;
+  --color-zluta: #f7d048;
+  --color-zluta-dark: #735800;
   --color-smrk: #f4f2ed;
   --color-grafika: #5b5e57;
 

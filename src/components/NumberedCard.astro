@@ -11,12 +11,12 @@ interface Props {
 const { number, title, text, href, variant = 'plain' } = Astro.props;
 
 const variants = {
-  filled: 'bg-cihla text-papir hover:bg-grafit',
-  outline: 'border border-cihla bg-transparent text-grafit hover:bg-cihla hover:text-papir',
+  filled: 'bg-zluta text-grafit hover:bg-grafit hover:text-papir',
+  outline: 'border border-grafit bg-transparent text-grafit hover:border-zluta hover:bg-zluta',
   plain: 'bg-papir text-grafit hover:bg-grafit hover:text-papir',
 };
 
-const titleColor = variant === 'outline' ? 'text-cihla-dark group-hover:text-papir' : '';
+const titleColor = variant === 'outline' ? 'text-zluta-dark group-hover:text-grafit' : '';
 ---
 
 <a href={href} class={`group flex h-full flex-col p-7 transition-colors duration-200 ${variants[variant]}`}>

@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SectionLabel from '../components/SectionLabel.astro';
-import { site, branches } from '../data/site';
+import { site, contacts, tel } from '../data/site';
 import { mainServices } from '../data/services';
 ---
 
@@ -20,18 +20,18 @@ import { mainServices } from '../data/services';
         </p>
         <div class="mt-10 space-y-6">
           {
-            branches.map((b) => (
-              <div class="border-l-2 border-cihla pl-6">
-                <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">{b.name}</p>
-                <a href={`tel:${b.phone.replace(/\s/g, '')}`} class="mt-1 block text-xl font-semibold hover:text-cihla-dark" data-track="phone">
-                  {b.phone}
+            contacts.map((c) => (
+              <div class="border-l-2 border-zluta pl-6">
+                <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">{c.name}</p>
+                <a href={tel(c.phone)} class="mt-1 block text-xl font-semibold hover:text-zluta-dark" data-track="phone">
+                  {c.phone}
                 </a>
               </div>
             ))
           }
-          <div class="border-l-2 border-cihla pl-6">
+          <div class="border-l-2 border-zluta pl-6">
             <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">E-mail</p>
-            <a href={`mailto:${site.email}`} class="mt-1 block text-xl font-semibold hover:text-cihla-dark" data-track="email">
+            <a href={`mailto:${site.email}`} class="mt-1 block text-xl font-semibold hover:text-zluta-dark" data-track="email">
               {site.email}
             </a>
           </div>
@@ -47,22 +47,22 @@ import { mainServices } from '../data/services';
           <div class="flex flex-col gap-2">
             <label for="name" class="text-xs font-semibold uppercase tracking-[0.15em]">Jméno a příjmení *</label>
             <input id="name" name="name" type="text" required autocomplete="name"
-              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla" />
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-grafit" />
           </div>
           <div class="flex flex-col gap-2">
             <label for="phone" class="text-xs font-semibold uppercase tracking-[0.15em]">Telefon *</label>
             <input id="phone" name="phone" type="tel" required autocomplete="tel"
-              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla" />
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-grafit" />
           </div>
           <div class="flex flex-col gap-2 sm:col-span-2">
             <label for="email" class="text-xs font-semibold uppercase tracking-[0.15em]">E-mail *</label>
             <input id="email" name="email" type="email" required autocomplete="email"
-              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla" />
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-grafit" />
           </div>
           <div class="flex flex-col gap-2 sm:col-span-2">
             <label for="service" class="text-xs font-semibold uppercase tracking-[0.15em]">Co poptáváte</label>
             <select id="service" name="service"
-              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla">
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-grafit">
               <option value="">— Vyberte službu —</option>
               {mainServices.map((s) => <option value={s.slug}>{s.title}</option>)}
               <option value="jine">Jiné / nevím</option>
@@ -71,7 +71,7 @@ import { mainServices } from '../data/services';
           <div class="flex flex-col gap-2 sm:col-span-2">
             <label for="message" class="text-xs font-semibold uppercase tracking-[0.15em]">Popis záměru *</label>
             <textarea id="message" name="message" rows="6" required
-              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-cihla"
+              class="border border-grafit/20 bg-papir px-4 py-3 text-body outline-none focus:border-grafit"
               placeholder="Lokalita, rozsah prací, termín, odkaz na projekt…"></textarea>
           </div>
         </div>
@@ -92,7 +92,7 @@ import { mainServices } from '../data/services';
 
         <button
           type="submit"
-          class="mt-8 inline-flex w-full items-center justify-center gap-3 bg-cihla px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-papir transition-colors hover:bg-grafit sm:w-auto"
+          class="mt-8 inline-flex w-full items-center justify-center gap-3 bg-zluta px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-grafit transition-colors hover:bg-grafit hover:text-papir sm:w-auto"
         >
           Odeslat poptávku <span aria-hidden="true">→</span>
         </button>

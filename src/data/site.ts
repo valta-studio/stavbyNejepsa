@@ -1,41 +1,42 @@
+// Kontaktní údaje převzaty z https://www.stavbynejepsa.cz/kontakt
 export const site = {
   name: 'Stavby Nejepsa s.r.o.',
   shortName: 'Stavby Nejepsa',
   claim: 'Kompletní realizace staveb, rekonstrukce a střechy',
-  phone: '+420 777 000 000',
-  email: 'info@stavbynejepsa.cz',
-  instagramUrl: 'https://www.instagram.com/stavbynejepsa/',
+  phone: '+420 604 482 935',
+  email: 'nejepsa@stavbynejepsa.cz',
+  instagramUrl: 'https://www.instagram.com/stavby_nejepsa_sro/',
+  facebookUrl: 'https://www.facebook.com/StavbyNejepsa',
   googleProfileUrl: 'https://www.google.com/maps', // TODO: odkaz na Google Business Profile
-  ico: '00000000', // TODO: doplnit IČO
+  ico: '18013392',
+  dic: 'CZ18013392',
+  address: {
+    street: 'Ke Strouze 118',
+    city: 'Vonoklasy',
+    zip: '252 28',
+  },
 };
 
-export interface Branch {
+export interface Contact {
   name: string;
-  street: string;
-  city: string;
-  zip: string;
+  role?: string;
   phone: string;
   email: string;
-  hours: string;
 }
 
-export const branches: Branch[] = [
+export const contacts: Contact[] = [
   {
-    name: 'Pobočka Praha',
-    street: 'Ulice 123', // TODO: doplnit adresu
-    city: 'Praha',
-    zip: '100 00',
-    phone: '+420 777 000 000',
-    email: 'praha@stavbynejepsa.cz',
-    hours: 'Po–Pá 8:00–16:30',
+    name: 'Jaroslav Nejepsa',
+    role: 'Jednatel',
+    phone: '+420 604 482 935',
+    email: 'nejepsa@stavbynejepsa.cz',
   },
   {
-    name: 'Nová pobočka', // TODO: doplnit podklady k nové pobočce
-    street: 'Ulice 456',
-    city: 'Město',
-    zip: '200 00',
-    phone: '+420 777 000 001',
-    email: 'info@stavbynejepsa.cz',
-    hours: 'Po–Pá 8:00–16:30',
+    name: 'Marek Beňo',
+    // TODO: doplnit pozici (na původním webu neuvedena)
+    phone: '+420 605 033 627',
+    email: 'marekbeno@stavbynejepsa.cz',
   },
 ];
+
+export const tel = (phone: string) => `tel:${phone.replace(/\s/g, '')}`;

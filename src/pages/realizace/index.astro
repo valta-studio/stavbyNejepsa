@@ -32,8 +32,8 @@ const filters = [
             data-filter={f.key}
             class={`border px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] transition-colors ${
               i === 0
-                ? 'border-cihla bg-cihla text-papir'
-                : 'border-grafit/20 bg-transparent text-grafit hover:border-cihla hover:text-cihla-dark'
+                ? 'border-zluta bg-zluta text-grafit'
+                : 'border-grafit/20 bg-transparent text-grafit hover:border-grafit'
             }`}
             aria-pressed={i === 0 ? 'true' : 'false'}
           >
@@ -68,11 +68,9 @@ const filters = [
       buttons.forEach((b) => {
         const active = b === btn;
         b.setAttribute('aria-pressed', String(active));
-        b.classList.toggle('bg-cihla', active);
-        b.classList.toggle('border-cihla', active);
-        b.classList.toggle('text-papir', active);
+        b.classList.toggle('bg-zluta', active);
+        b.classList.toggle('border-zluta', active);
         b.classList.toggle('border-grafit/20', !active);
-        b.classList.toggle('text-grafit', !active);
       });
       let visible = 0;
       cards.forEach((card) => {

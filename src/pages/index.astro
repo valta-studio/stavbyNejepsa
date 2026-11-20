@@ -77,8 +77,8 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
             class="group relative bg-papir px-5 py-5 text-base font-bold text-grafit transition-colors hover:bg-grafit hover:text-papir lg:px-7 lg:py-6 lg:text-lg"
           >
             {s.title}
-            <span class="absolute inset-x-0 bottom-0 h-1 bg-cihla" aria-hidden="true" />
-            <span aria-hidden="true" class="mt-1 block text-cihla transition-transform duration-200 group-hover:translate-x-1.5">→</span>
+            <span class="absolute inset-x-0 bottom-0 h-1 bg-zluta" aria-hidden="true" />
+            <span aria-hidden="true" class="mt-1 block text-zluta-dark transition-transform duration-200 group-hover:translate-x-1.5 group-hover:text-zluta">→</span>
           </a>
         ))
       }
@@ -95,13 +95,13 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
         <div class="relative z-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div class="px-5 pb-6 lg:px-8 lg:pb-10">
             <p class="text-sm font-semibold uppercase tracking-[0.2em] text-papir/80">
-              <span class="text-cihla">{String(i + 1).padStart(2, '0')}</span> · {p.location} · {p.year}
+              <span class="text-zluta">{String(i + 1).padStart(2, '0')}</span> · {p.location} · {p.year}
             </p>
             <h2 class="mt-3 max-w-4xl text-display font-bold leading-none text-outline-papir">{p.title}</h2>
           </div>
           <a
             href={`/realizace/${p.slug}`}
-            class="group flex items-center gap-4 bg-cihla px-8 py-7 text-lg font-bold text-papir transition-colors hover:bg-grafit lg:px-12 lg:py-9"
+            class="group flex items-center gap-4 bg-zluta px-8 py-7 text-lg font-bold text-grafit transition-colors hover:bg-grafit hover:text-papir lg:px-12 lg:py-9"
           >
             Prohlédnout si detail stavby
             <span aria-hidden="true" class="transition-transform duration-200 group-hover:translate-x-1.5">→</span>
@@ -116,13 +116,13 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
     <!-- Proč my -->
     <section class="bg-grafit text-papir">
       <div class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
-        <SectionLabel class="!text-cihla">Proč my</SectionLabel>
+        <SectionLabel class="!text-zluta">Proč my</SectionLabel>
         <h2 class="mt-3 max-w-3xl text-h2 font-bold">Proč si vybrat naši firmu</h2>
         <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {
             whyUs.map((item, i) => (
               <div class="border-t border-papir/20 pt-6">
-                <span class="text-3xl font-light tabular-nums text-cihla">{String(i + 1).padStart(2, '0')}</span>
+                <span class="text-3xl font-light tabular-nums text-zluta">{String(i + 1).padStart(2, '0')}</span>
                 <h3 class="mt-4 text-xl font-bold">{item.title}</h3>
                 <p class="mt-3 text-sm leading-relaxed text-papir/70">{item.text}</p>
               </div>
@@ -143,7 +143,7 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
       </div>
       <div class="mt-12 grid gap-px bg-grafit/10 sm:grid-cols-2 lg:grid-cols-3">
         {
-          technologies.slice(0, 6).map((t) => (
+          technologies.map((t) => (
             <div class="bg-beton p-7">
               <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">{t.usedFor}</p>
               <h3 class="mt-2 text-lg font-bold">{t.name}</h3>
@@ -165,7 +165,7 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
             href={site.instagramUrl}
             rel="noopener"
             target="_blank"
-            class="inline-flex items-center gap-3 bg-grafit px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-papir transition-colors hover:bg-cihla"
+            class="inline-flex items-center gap-3 bg-grafit px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-papir transition-colors hover:bg-zluta hover:text-grafit"
           >
             Sledujte nás na Instagramu <span aria-hidden="true">→</span>
           </a>
@@ -176,7 +176,7 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
             latest.map((p) => (
               <a href={`/realizace/${p.slug}`} class="group block">
                 <PhotoPlaceholder name={`project-${p.slug}`} label={p.title} ratio="aspect-square" />
-                <p class="mt-3 text-sm font-semibold group-hover:text-cihla-dark">{p.title}</p>
+                <p class="mt-3 text-sm font-semibold group-hover:text-zluta-dark">{p.title}</p>
                 <p class="text-xs uppercase tracking-[0.15em] text-grafika">{p.location} · {p.year}</p>
               </a>
             ))
