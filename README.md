@@ -1,4 +1,4 @@
-# Stavby Nejepša — web
+# Stavby Nejepsa — web
 
 Nový web stavební firmy podle projektového kontextu (`stavby-nejepsa-projekt-kontext.md`).
 Design tokeny (barvy, typografie Poppins, komponenty) vychází z dodaného design boardu.

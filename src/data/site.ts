@@ -1,6 +1,6 @@
 export const site = {
-  name: 'Stavby Nejepša s.r.o.',
-  shortName: 'Stavby Nejepša',
+  name: 'Stavby Nejepsa s.r.o.',
+  shortName: 'Stavby Nejepsa',
   claim: 'Kompletní realizace staveb, rekonstrukce a střechy',
   phone: '+420 777 000 000',
   email: 'info@stavbynejepsa.cz',
