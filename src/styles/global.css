@@ -36,16 +36,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Fullscreen „slide deck“ na homepage — snap jen na desktopu, proximity nedrží dlouhý obsah */
-@media (min-width: 1024px) {
-  html {
-    scroll-snap-type: y proximity;
-  }
-  .slide {
-    scroll-snap-align: start;
-  }
-}
-
 /* Obrysový display titulek přes fotku (vzor „4kk“ z moodboardu) */
 @utility text-outline-papir {
   color: transparent;

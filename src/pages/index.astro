@@ -5,7 +5,6 @@ import Button from '../components/Button.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import PhotoPlaceholder from '../components/PhotoPlaceholder.astro';
 import CtaSection from '../components/CtaSection.astro';
-import DotNav from '../components/DotNav.astro';
 import { site } from '../data/site';
 import { mainServices } from '../data/services';
 import { featuredProjects, projects } from '../data/projects';
@@ -48,12 +47,6 @@ const whyUs = [
 
 const slides = featuredProjects.slice(0, 3);
 const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
-
-const dotItems = [
-  { id: 'uvod', label: 'Úvod' },
-  ...slides.map((p, i) => ({ id: `projekt-${i + 1}`, label: p.title })),
-  { id: 'obsah', label: 'Více o firmě' },
-];
 ---
 
 <Layout
@@ -61,10 +54,8 @@ const dotItems = [
   description="Rodinná stavební firma. Rodinné domy na klíč, rekonstrukce, ploché i šikmé střechy a fasády. Kompletní realizace staveb s vlastními lidmi a prověřenými materiály."
   headerVariant="overlay"
 >
-  <DotNav items={dotItems} />
-
-  <!-- Slide 1: fullscreen hero s kartami hlavních služeb -->
-  <section id="uvod" class="slide relative flex min-h-svh flex-col">
+  <!-- Fullscreen hero s kartami hlavních služeb -->
+  <section id="uvod" class="relative flex min-h-svh flex-col">
     <PhotoPlaceholder fill name="home-hero" eager label="Moderní rodinný dům na klíč s dřevěnou fasádou" />
     <div class="absolute inset-0 bg-gradient-to-t from-grafit/70 via-grafit/20 to-grafit/30" aria-hidden="true"></div>
 
@@ -94,10 +85,10 @@ const dotItems = [
     </div>
   </section>
 
-  <!-- Slidy 2–4: vybrané realizace přes celou obrazovku -->
+  <!-- Vybrané realizace přes celou obrazovku -->
   {
     slides.map((p, i) => (
-      <section id={`projekt-${i + 1}`} class="slide relative flex min-h-svh flex-col justify-end">
+      <section id={`projekt-${i + 1}`} class="relative flex min-h-svh flex-col justify-end">
         <PhotoPlaceholder fill name={`project-${p.slug}`} label={`${p.title} — ${p.location}`} />
         <div class="absolute inset-0 bg-gradient-to-t from-grafit/60 via-transparent to-transparent" aria-hidden="true" />
 
@@ -123,7 +114,7 @@ const dotItems = [
   <!-- Obsahová část -->
   <div id="obsah">
     <!-- Proč my -->
-    <section class="slide bg-grafit text-papir">
+    <section class="bg-grafit text-papir">
       <div class="mx-auto max-w-7xl px-5 py-24 lg:px-8">
         <SectionLabel class="!text-cihla">Proč my</SectionLabel>
         <h2 class="mt-3 max-w-3xl text-h2 font-bold">Proč si vybrat naši firmu</h2>
