@@ -37,6 +37,20 @@ const posterSrc = getPhoto(`project-${project.slug}`)?.src;
       <PhotoPlaceholder fill name={`project-${project.slug}`} eager label={`${project.title} — ${project.location}`} />
       <div class="absolute inset-0 bg-gradient-to-t from-grafit/60 via-transparent to-grafit/30" aria-hidden="true"></div>
 
+      <!-- Indikátor scrollu dolů k detailu realizace -->
+      <a
+        href="#detail"
+        class="group relative z-10 mb-8 flex flex-col items-center gap-2 self-center text-papir/80 transition-colors hover:text-papir lg:mb-10"
+        aria-label="Posunout dolů na detail realizace"
+      >
+        <span class="text-xs font-semibold uppercase tracking-[0.2em]">Detail stavby</span>
+        <span class="flex h-11 w-11 items-center justify-center rounded-full border border-papir/50 transition-colors group-hover:border-cihla group-hover:bg-cihla">
+          <svg class="h-5 w-5 motion-safe:animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </span>
+      </a>
+
       <div class="relative z-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div class="px-5 pb-6 lg:px-8 lg:pb-10">
           <p class="text-sm font-semibold uppercase tracking-[0.2em] text-papir/80">
@@ -55,7 +69,7 @@ const posterSrc = getPhoto(`project-${project.slug}`)?.src;
       </div>
     </section>
 
-    <section class="mx-auto max-w-7xl px-5 pb-12 pt-14 lg:px-8">
+    <section id="detail" class="mx-auto max-w-7xl scroll-mt-20 px-5 pb-12 pt-14 lg:px-8">
       <dl class="flex flex-wrap gap-x-12 gap-y-4 border-y border-grafit/10 py-6">
         <div>
           <dt class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">Lokalita</dt>
