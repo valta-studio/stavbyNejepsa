@@ -19,6 +19,12 @@ interface Props {
 const { project } = Astro.props;
 const techs = project.technologies.map(getTechnology).filter((t) => t !== undefined);
 const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
+
+// Video z realizace — zobrazí se, jakmile existuje public/videos/<slug>.mp4
+import fs from 'node:fs';
+import { getPhoto } from '../../lib/photos';
+const hasVideo = fs.existsSync(new URL(`../../../public/videos/${project.slug}.mp4`, import.meta.url));
+const posterSrc = getPhoto(`project-${project.slug}`)?.src;
 ---
 
 <Layout title={project.title} description={project.description} headerVariant="overlay">
@@ -65,16 +71,46 @@ const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
       <p class="mt-8 max-w-2xl text-body text-grafika">{project.description}</p>
     </section>
 
-    <!-- Galerie — po napojení Sanity nahradí lightbox s progresivním načítáním -->
+    <!-- Postup realizace od začátku do konce -->
     <section class="mx-auto max-w-7xl px-5 lg:px-8">
-      <div class="grid grid-cols-2 gap-6 lg:grid-cols-3">
+      <SectionLabel>Postup realizace</SectionLabel>
+      <h2 class="mt-3 text-h2 font-bold">Jak stavba vznikala</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {
-          Array.from({ length: project.galleryCount }).map((_, i) => (
-            <PhotoPlaceholder label={`Foto ${i + 1}`} ratio="aspect-[4/3]" />
+          project.stages.map((stage, i) => (
+            <figure>
+              <PhotoPlaceholder
+                name={`gallery-${project.slug}-${i + 1}`}
+                label={`${project.title} — ${stage}`}
+                ratio="aspect-[4/3]"
+              />
+              <figcaption class="mt-3 flex items-baseline gap-3">
+                <span class="text-2xl font-light tabular-nums text-cihla-dark">{String(i + 1).padStart(2, '0')}</span>
+                <span class="text-sm font-semibold uppercase tracking-[0.12em]">{stage}</span>
+              </figcaption>
+            </figure>
           ))
         }
       </div>
     </section>
+
+    {
+      hasVideo && (
+        <section class="mx-auto max-w-7xl px-5 pt-20 lg:px-8">
+          <SectionLabel>Video</SectionLabel>
+          <h2 class="mt-3 text-h2 font-bold">Projděte si stavbu</h2>
+          <video
+            class="mt-8 aspect-video w-full bg-grafit object-cover"
+            controls
+            preload="none"
+            poster={posterSrc}
+            src={`/videos/${project.slug}.mp4`}
+          >
+            Váš prohlížeč nepodporuje přehrávání videa.
+          </video>
+        </section>
+      )
+    }
 
     {
       techs.length > 0 && (

@@ -12,7 +12,16 @@ export interface Project {
   featured: boolean;
   description: string;
   galleryCount: number;
+  /** Popisky fází výstavby — fotky `gallery-<slug>-1..4` v src/assets/photos */
+  stages: [string, string, string, string];
 }
+
+export const defaultStages: [string, string, string, string] = [
+  'Základy a příprava',
+  'Hrubá stavba',
+  'Dokončovací práce',
+  'Hotová stavba',
+];
 
 export const projects: Project[] = [
   {
@@ -27,6 +36,7 @@ export const projects: Project[] = [
     description:
       'Moderní dřevostavba s plochou střechou a modřínovou provětrávanou fasádou. Kompletní realizace na klíč od základové desky po terénní úpravy.',
     galleryCount: 6,
+    stages: ['Základová deska', 'Montáž dřevostavby', 'Fasáda a interiéry', 'Hotová vila'],
   },
   {
     slug: 'rodinny-dum-beroun',
@@ -40,6 +50,7 @@ export const projects: Project[] = [
     description:
       'Zděná novostavba 5+kk z broušených cihelných bloků se sedlovou střechou z betonové krytiny a kontaktním zateplením.',
     galleryCount: 6,
+    stages: ['Základy', 'Hrubá stavba zdiva', 'Střecha a omítky', 'Hotový dům'],
   },
   {
     slug: 'rekonstrukce-bytu-vinohrady',
@@ -53,6 +64,7 @@ export const projects: Project[] = [
     description:
       'Kompletní rekonstrukce bytu 4+1 v činžovním domě — nové dispozice, rozvody, podlahy, koupelny i truhlářské prvky na míru.',
     galleryCount: 5,
+    stages: ['Bourací práce', 'Nové rozvody a příčky', 'Povrchy a podlahy', 'Hotový byt'],
   },
   {
     slug: 'plocha-strecha-kladno',
@@ -66,6 +78,7 @@ export const projects: Project[] = [
     description:
       'Rekonstrukce ploché střechy bytového domu — nová spádová vrstva, zateplení a hydroizolace z PVC fólie včetně odvodnění.',
     galleryCount: 4,
+    stages: ['Demontáž staré skladby', 'Spádové klíny a izolace', 'Pokládka PVC fólie', 'Hotová střecha'],
   },
   {
     slug: 'sikma-strecha-dobris',
@@ -79,6 +92,7 @@ export const projects: Project[] = [
     description:
       'Výměna krovu a kompletní nová střecha rodinného domu — betonová krytina, nadkrokevní izolace a klempířské prvky z titanzinku.',
     galleryCount: 4,
+    stages: ['Demontáž a krov', 'Fólie a laťování', 'Pokládka krytiny', 'Hotová střecha'],
   },
   {
     slug: 'zatepleni-pribram',
@@ -92,6 +106,7 @@ export const projects: Project[] = [
     description:
       'Kontaktní zateplení rodinného domu šedým polystyrenem se silikonovou omítkou, včetně soklu a nových parapetů.',
     galleryCount: 4,
+    stages: ['Založení systému', 'Lepení izolantu', 'Stěrka a omítka', 'Hotová fasáda'],
   },
   {
     slug: 'provetravana-fasada-admin',
@@ -105,6 +120,7 @@ export const projects: Project[] = [
     description:
       'Opláštění administrativní budovy provětrávanou fasádou z cementovláknitých desek na hliníkovém roštu.',
     galleryCount: 5,
+    stages: ['Nosný rošt', 'Izolace a fólie', 'Montáž desek', 'Hotová fasáda'],
   },
 ];
 
