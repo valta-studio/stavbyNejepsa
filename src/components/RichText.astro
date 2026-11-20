@@ -9,11 +9,8 @@ interface Props {
 }
 const { blocks } = Astro.props;
 
-const imageLayouts = {
-  full: 'clear-both my-10',
-  left: 'my-6 md:float-left md:mr-10 md:mb-6 md:w-[45%]',
-  right: 'my-6 md:float-right md:mb-6 md:ml-10 md:w-[45%]',
-};
+// Všechny obrázky se renderují přes celou šířku obsahu.
+// Pole `layout` v datech zůstává kvůli kompatibilitě se Sanity schématem, ale ignoruje se.
 ---
 
 <div class="rich-text">
@@ -21,8 +18,8 @@ const imageLayouts = {
     blocks.map((b) => {
       if (b._type === 'imageWithMeta') {
         return (
-          <figure class={imageLayouts[b.layout]}>
-            <PhotoPlaceholder name={b.name} label={b.alt} ratio="aspect-[4/3]" />
+          <figure class="clear-both my-10">
+            <PhotoPlaceholder name={b.name} label={b.alt} ratio="aspect-[3/2]" sizes="(min-width: 1280px) 1216px, 100vw" />
             {b.caption && (
               <figcaption class="mt-3 border-l-2 border-zluta pl-4 text-sm text-grafika">{b.caption}</figcaption>
             )}
@@ -31,10 +28,10 @@ const imageLayouts = {
       }
       if (b._type === 'bulletList') {
         return (
-          <ul class="my-6 space-y-3">
+          <ul class="my-6 max-w-[62ch] space-y-3">
             {b.items.map((item) => (
               <li class="flex items-start gap-3 text-body font-medium">
-                <span aria-hidden="true" class="mt-1 text-zluta">→</span>
+                <span aria-hidden="true" class="mt-1 text-zluta-dark">→</span>
                 {item}
               </li>
             ))}
@@ -42,19 +39,19 @@ const imageLayouts = {
         );
       }
       if (b.style === 'h2') {
-        return <h2 class="clear-both pt-10 text-h3 font-bold first:pt-0">{b.text}</h2>;
+        return <h2 class="clear-both max-w-[62ch] pt-10 text-h3 font-bold first:pt-0">{b.text}</h2>;
       }
       if (b.style === 'h3') {
-        return <h3 class="pt-6 text-xl font-bold">{b.text}</h3>;
+        return <h3 class="max-w-[62ch] pt-6 text-xl font-bold">{b.text}</h3>;
       }
       if (b.style === 'blockquote') {
         return (
-          <blockquote class="clear-both my-10 border-l-4 border-zluta pl-6 text-h3 font-medium leading-snug text-grafit">
+          <blockquote class="clear-both my-10 max-w-4xl border-l-4 border-zluta pl-6 text-h3 font-medium leading-snug text-grafit">
             {b.text}
           </blockquote>
         );
       }
-      return <p class="mt-5 text-body text-grafika">{b.text}</p>;
+      return <p class="mt-5 max-w-[62ch] text-body text-grafika">{b.text}</p>;
     })
   }
   <div class="clear-both"></div>
