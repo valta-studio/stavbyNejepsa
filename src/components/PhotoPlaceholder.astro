@@ -4,12 +4,19 @@
 interface Props {
   label?: string;
   ratio?: string; // tailwind aspect-* hodnota
+  fill?: boolean; // absolutně vyplní rodiče (fullscreen hero slidy)
   class?: string;
 }
-const { label = 'Fotografie dodá klient', ratio = 'aspect-[16/9]', class: className = '' } = Astro.props;
+const {
+  label = 'Fotografie dodá klient',
+  ratio = 'aspect-[16/9]',
+  fill = false,
+  class: className = '',
+} = Astro.props;
+const sizing = fill ? 'absolute inset-0 h-full w-full' : `relative ${ratio} w-full`;
 ---
 
-<div class={`photo-placeholder relative ${ratio} w-full overflow-hidden ${className}`} role="img" aria-label={label}>
+<div class={`photo-placeholder ${sizing} overflow-hidden ${className}`} role="img" aria-label={label}>
   <span class="absolute inset-0 flex items-center justify-center p-4 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-grafika">
     {label}
   </span>

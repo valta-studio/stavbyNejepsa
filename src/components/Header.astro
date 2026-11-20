@@ -1,87 +1,128 @@
 ---
+// Fixní logo vlevo + tlačítko „Menu“ vpravo, navigace jako overlay panel zprava.
+// Varianta 'overlay' = bílé logo přes fotku, 'light' = grafitové logo na betonu.
 import Button from './Button.astro';
 import { site } from '../data/site';
+import { services } from '../data/services';
 
-const nav = [
-  { href: '/rodinne-domy-na-klic', label: 'Domy na klíč' },
-  { href: '/rekonstrukce', label: 'Rekonstrukce' },
-  { href: '/strechy', label: 'Střechy' },
-  { href: '/fasady', label: 'Fasády' },
-  { href: '/realizace', label: 'Realizace' },
-  { href: '/technologie', label: 'Technologie' },
-  { href: '/o-nas', label: 'O nás' },
-  { href: '/kontakt', label: 'Kontakt' },
-];
+interface Props {
+  variant?: 'overlay' | 'light';
+}
+const { variant = 'light' } = Astro.props;
 
-const current = Astro.url.pathname;
+const groups = services
+  .filter((s) => !s.parent)
+  .map((s) => ({
+    title: s.title,
+    href: s.path,
+    children: (s.children ?? []).map((slug) => {
+      const child = services.find((x) => x.slug === slug)!;
+      return { title: child.menuTitle, href: child.path };
+    }),
+  }));
+
+const logoColor = variant === 'overlay' ? 'text-papir' : 'text-grafit';
 ---
 
-<header class="sticky top-0 z-50 border-b border-grafit/10 bg-papir">
-  <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 lg:px-8">
-    <a href="/" class="flex items-baseline gap-2" aria-label={site.name}>
+<div class="pointer-events-none fixed inset-x-0 top-0 z-50">
+  <div class="flex items-start justify-between">
+    <a href="/" class={`pointer-events-auto m-5 lg:m-8 ${logoColor}`} aria-label={site.name}>
       <!-- TODO: nahradit SVG lockupem z vektorového loga -->
-      <span class="text-lg font-bold uppercase tracking-tight">Stavby<span class="text-cihla-dark">&nbsp;Nejepša</span></span>
-      <span class="hidden text-[10px] font-medium uppercase tracking-[0.2em] text-grafika sm:inline">s.r.o.</span>
+      <span class="block text-xl font-bold uppercase leading-none tracking-tight">Stavby</span>
+      <span class="block text-xl font-bold uppercase leading-none tracking-tight text-cihla">Nejepša</span>
     </a>
-
-    <nav class="hidden items-center gap-6 xl:flex" aria-label="Hlavní navigace">
-      {
-        nav.map((item) => (
-          <a
-            href={item.href}
-            class={`text-sm font-medium transition-colors hover:text-cihla-dark ${
-              current.startsWith(item.href) ? 'text-cihla-dark' : 'text-grafit'
-            }`}
-            aria-current={current.startsWith(item.href) ? 'page' : undefined}
-          >
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
-
-    <div class="hidden xl:block">
-      <Button href="/poptavka">Poptávka</Button>
-    </div>
-
     <button
-      id="menu-toggle"
+      id="menu-open"
       type="button"
-      class="flex h-11 w-11 items-center justify-center border border-grafit/20 xl:hidden"
+      class="pointer-events-auto flex items-center gap-3 bg-papir px-6 py-5 text-sm font-semibold uppercase tracking-[0.12em] text-grafit transition-colors hover:bg-cihla hover:text-papir lg:px-8"
       aria-expanded="false"
-      aria-controls="mobile-menu"
-      aria-label="Otevřít menu"
+      aria-controls="site-menu"
     >
-      <span class="flex flex-col gap-1.5">
-        <span class="block h-0.5 w-5 bg-grafit"></span>
-        <span class="block h-0.5 w-5 bg-grafit"></span>
-        <span class="block h-0.5 w-5 bg-grafit"></span>
+      Menu
+      <span aria-hidden="true" class="flex flex-col gap-1">
+        <span class="block h-0.5 w-5 bg-current"></span>
+        <span class="block h-0.5 w-5 bg-current"></span>
+        <span class="block h-0.5 w-5 bg-current"></span>
       </span>
     </button>
   </div>
+</div>
 
-  <div id="mobile-menu" class="hidden border-t border-grafit/10 bg-papir xl:hidden">
-    <nav class="mx-auto flex max-w-7xl flex-col px-5 py-4" aria-label="Mobilní navigace">
+<!-- Overlay navigace -->
+<div id="site-menu" class="invisible fixed inset-0 z-[60]" aria-hidden="true">
+  <div id="menu-backdrop" class="absolute inset-0 bg-grafit/60 opacity-0 transition-opacity duration-300"></div>
+  <nav
+    id="menu-panel"
+    class="absolute inset-y-0 right-0 flex w-full max-w-md translate-x-full flex-col overflow-y-auto bg-papir px-8 pb-10 pt-6 transition-transform duration-300 lg:px-12"
+    aria-label="Hlavní navigace"
+  >
+    <div class="flex justify-end">
+      <button id="menu-close" type="button" class="p-3 text-grafit transition-colors hover:text-cihla-dark" aria-label="Zavřít menu">
+        <span aria-hidden="true" class="text-3xl leading-none">×</span>
+      </button>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-7 text-right">
       {
-        nav.map((item) => (
-          <a href={item.href} class="border-b border-grafit/10 py-3.5 text-base font-medium text-grafit">
-            {item.label}
-          </a>
+        groups.map((g) => (
+          <div>
+            <a href={g.href} class="text-2xl font-bold text-grafit transition-colors hover:text-cihla-dark">
+              {g.title}
+            </a>
+            {g.children.length > 0 && (
+              <div class="mt-2 flex flex-col gap-1.5">
+                {g.children.map((c) => (
+                  <a href={c.href} class="text-base font-medium text-grafika transition-colors hover:text-cihla-dark">
+                    {c.title}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
         ))
       }
-      <div class="pt-5">
-        <Button href="/poptavka" class="w-full">Nezávazná poptávka</Button>
+
+      <div>
+        <a href="/realizace" class="text-2xl font-bold text-grafit transition-colors hover:text-cihla-dark">Realizace</a>
+        <div class="mt-2 flex flex-col gap-1.5">
+          <a href="/technologie" class="text-base font-medium text-grafika transition-colors hover:text-cihla-dark">Technologie</a>
+        </div>
       </div>
-    </nav>
-  </div>
-</header>
+      <a href="/o-nas" class="text-2xl font-bold text-grafit transition-colors hover:text-cihla-dark">O nás</a>
+      <a href="/kontakt" class="text-2xl font-bold text-grafit transition-colors hover:text-cihla-dark">Kontakt</a>
+    </div>
+
+    <div class="mt-auto flex flex-col items-end gap-5 pt-12">
+      <Button href="/poptavka" arrow>Nezávazná poptávka</Button>
+      <div class="flex gap-5 text-sm font-semibold uppercase tracking-[0.12em]">
+        <a href={site.instagramUrl} rel="noopener" target="_blank" class="text-grafika hover:text-cihla-dark">Instagram</a>
+        <a href={site.googleProfileUrl} rel="noopener" target="_blank" class="text-grafika hover:text-cihla-dark">Google recenze</a>
+      </div>
+    </div>
+  </nav>
+</div>
 
 <script>
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  toggle?.addEventListener('click', () => {
-    const open = menu?.classList.toggle('hidden') === false;
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+  const root = document.getElementById('site-menu');
+  const panel = document.getElementById('menu-panel');
+  const backdrop = document.getElementById('menu-backdrop');
+  const openBtn = document.getElementById('menu-open');
+  const closeBtn = document.getElementById('menu-close');
+
+  function setOpen(open: boolean) {
+    if (!root || !panel || !backdrop) return;
+    root.classList.toggle('invisible', !open);
+    root.setAttribute('aria-hidden', String(!open));
+    panel.classList.toggle('translate-x-full', !open);
+    backdrop.classList.toggle('opacity-0', !open);
+    openBtn?.setAttribute('aria-expanded', String(open));
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+  }
+
+  openBtn?.addEventListener('click', () => setOpen(true));
+  closeBtn?.addEventListener('click', () => setOpen(false));
+  backdrop?.addEventListener('click', () => setOpen(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
   });
 </script>

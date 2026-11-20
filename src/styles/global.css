@@ -36,6 +36,28 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Fullscreen „slide deck“ na homepage — snap jen na desktopu, proximity nedrží dlouhý obsah */
+@media (min-width: 1024px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+  .slide {
+    scroll-snap-align: start;
+  }
+}
+
+/* Obrysový display titulek přes fotku (vzor „4kk“ z moodboardu) */
+@utility text-outline-papir {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-papir);
+  text-stroke: 2px var(--color-papir);
+}
+@utility text-outline-grafit {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-grafit);
+  text-stroke: 2px var(--color-grafit);
+}
+
 body {
   background-color: var(--color-beton);
   color: var(--color-grafit);

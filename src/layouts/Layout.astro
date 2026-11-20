@@ -11,9 +11,11 @@ import { site } from '../data/site';
 interface Props {
   title: string;
   description: string;
+  // 'overlay' = stránka začíná fullscreen fotkou (header přes ni), 'light' = obsahová stránka na betonu
+  headerVariant?: 'overlay' | 'light';
 }
 
-const { title, description } = Astro.props;
+const { title, description, headerVariant = 'light' } = Astro.props;
 const fullTitle = `${title} | ${site.shortName}`;
 ---
 
@@ -32,8 +34,8 @@ const fullTitle = `${title} | ${site.shortName}`;
     <!-- TODO: favicon set + OG image šablona z vektorového loga -->
   </head>
   <body class="flex min-h-screen flex-col">
-    <Header />
-    <main class="flex-1">
+    <Header variant={headerVariant} />
+    <main class={`flex-1 ${headerVariant === 'light' ? 'pt-24 lg:pt-28' : ''}`}>
       <slot />
     </main>
     <Footer />

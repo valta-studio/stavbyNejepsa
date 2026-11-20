@@ -1,0 +1,42 @@
+---
+// Tečková navigace pro fullscreen slidy na homepage (jen desktop).
+interface Props {
+  items: { id: string; label: string }[];
+}
+const { items } = Astro.props;
+---
+
+<nav id="dot-nav" class="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-3 lg:flex" aria-label="Navigace po sekcích">
+  {
+    items.map((item) => (
+      <a
+        href={`#${item.id}`}
+        data-target={item.id}
+        class="block h-3 w-3 rounded-full border-2 border-papir bg-transparent transition-colors"
+        aria-label={item.label}
+      />
+    ))
+  }
+</nav>
+
+<script>
+  const dots = document.querySelectorAll<HTMLAnchorElement>('#dot-nav a');
+  if (dots.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const dot = document.querySelector(`#dot-nav a[data-target="${entry.target.id}"]`);
+          if (entry.isIntersecting) {
+            dots.forEach((d) => d.classList.remove('bg-papir'));
+            dot?.classList.add('bg-papir');
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    dots.forEach((dot) => {
+      const section = document.getElementById(dot.dataset.target ?? '');
+      if (section) observer.observe(section);
+    });
+  }
+</script>

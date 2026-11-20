@@ -16,7 +16,7 @@ const filters = [
   title="Realizace"
   description="Vybrané realizace — rodinné domy na klíč, rekonstrukce, střechy a fasády. Skutečné zakázky, skutečné fotografie."
 >
-  <section class="mx-auto max-w-7xl px-5 pb-10 pt-16 lg:px-8 lg:pt-24">
+  <section class="mx-auto max-w-7xl px-5 pb-10 pt-6 lg:px-8 lg:pt-10">
     <SectionLabel>Naše práce</SectionLabel>
     <h1 class="mt-4 text-display font-bold">Realizace</h1>
     <p class="mt-6 max-w-2xl text-body text-grafika">
@@ -45,8 +45,9 @@ const filters = [
   </section>
 
   <section class="mx-auto max-w-7xl px-5 pb-24 lg:px-8">
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="project-grid">
-      {projects.map((p, i) => <ProjectCard project={p} number={String(i + 1).padStart(2, '0')} />)}
+    <!-- Velké foto-karty přes dva sloupce — fotky hrají hlavní roli -->
+    <div class="grid gap-x-10 gap-y-14 md:grid-cols-2" id="project-grid">
+      {projects.map((p, i) => <ProjectCard project={p} number={String(i + 1).padStart(2, '0')} ratio="aspect-[16/10]" />)}
     </div>
     <p id="no-results" class="hidden py-16 text-center text-body text-grafika">
       V této kategorii zatím nemáme zveřejněnou žádnou realizaci.
