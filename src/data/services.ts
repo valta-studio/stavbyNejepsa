@@ -300,7 +300,7 @@ export const services: Service[] = [
       'Možnost suché celoroční montáže',
       'Estetické vlastnosti',
     ],
-    processTitle: 'Postup montáže a nejčastější chyby',
+    processTitle: 'Postup montáže',
     process: [
       {
         title: 'Osazení kotevních prvků',

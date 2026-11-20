@@ -62,6 +62,7 @@ export const technologies: Technology[] = [
     description:
       'Přesné broušené cihly zděné na tenkovrstvou maltu nebo pěnu. Rychlá a přesná výstavba s výbornými tepelnými parametry.',
     usedFor: 'Zděné rodinné domy',
+    category: 'materialy',
   },
   {
     slug: 'kvh-bsh',
@@ -70,6 +71,7 @@ export const technologies: Technology[] = [
     description:
       'Certifikované sušené konstrukční dřevo pro dřevostavby, krovy a pohledové konstrukce. Tvarová stálost a garantovaná pevnost.',
     usedFor: 'Dřevostavby, krovy',
+    category: 'materialy',
   },
   {
     slug: 'pvc-folie',
@@ -78,6 +80,7 @@ export const technologies: Technology[] = [
     description:
       'Fóliové hydroizolace plochých střech s životností přes 30 let. Jsme proškolení aplikátoři s materiálovou zárukou výrobce.',
     usedFor: 'Ploché střechy',
+    category: 'materialy',
   },
   {
     slug: 'betonova-taska',
@@ -86,6 +89,7 @@ export const technologies: Technology[] = [
     description:
       'Betonové tašky s dlouhou životností a kompletním systémem doplňků — hřebenáče, prostupy, sněhové zábrany.',
     usedFor: 'Šikmé střechy',
+    category: 'materialy',
   },
   {
     slug: 'etics',
@@ -94,6 +98,7 @@ export const technologies: Technology[] = [
     description:
       'Certifikovaný kontaktní zateplovací systém — polystyren nebo minerální vata, systémové lišty a omítky.',
     usedFor: 'Zateplení fasád',
+    category: 'materialy',
   },
   {
     slug: 'cementovlaknite-desky',
@@ -102,6 +107,7 @@ export const technologies: Technology[] = [
     description:
       'Velkoformátové desky pro provětrávané fasády. Odolné, barevně stálé, s minimální údržbou.',
     usedFor: 'Provětrávané fasády',
+    category: 'materialy',
   },
   {
     slug: 'spadove-kliny',
@@ -110,6 +116,7 @@ export const technologies: Technology[] = [
     description:
       'Spádové vrstvy plochých střech z EPS klínů — nízká hmotnost, přesný spád k vpustím bez mokrých procesů.',
     usedFor: 'Ploché střechy',
+    category: 'materialy',
   },
 ];
 
