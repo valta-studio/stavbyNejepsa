@@ -1,5 +1,4 @@
 // Zrcadlí budoucí Sanity dokument `technology`.
-// TODO: aktuální seznam technologií a dodavatelů dodá klient.
 
 export interface Technology {
   slug: string;
@@ -7,9 +6,55 @@ export interface Technology {
   partner: string;
   description: string;
   usedFor: string;
+  category: 'technologie-domu' | 'materialy';
 }
 
 export const technologies: Technology[] = [
+  {
+    slug: 'rekuperace',
+    name: 'Rekuperace',
+    partner: 'Centrální i decentrální jednotky',
+    description:
+      'Využitím kombinace centrálních a decentrálních jednotek zajistí systémy rekuperace účinnou regulaci teploty a kvality vzduchu v celé budově. Čerstvý vzduch bez otevírání oken — a bez zbytečných tepelných ztrát.',
+    usedFor: 'Novostavby i rekonstrukce',
+    category: 'technologie-domu',
+  },
+  {
+    slug: 'podomitkove-boxy',
+    name: 'Podomítkové boxy',
+    partner: 'Climax · motory Somfy',
+    description:
+      'Pro žaluzie a rolety používáme podomítkové boxy Climax s motory Somfy. Jsou navrženy tak, aby byla jejich instalace jednoduchá, a zároveň jsou pozoruhodně odolné — vydrží dlouhá léta. Po omítnutí z fasády nic nevyčnívá.',
+    usedFor: 'Žaluzie a rolety',
+    category: 'technologie-domu',
+  },
+  {
+    slug: 'tepelna-cerpadla',
+    name: 'Tepelná čerpadla',
+    partner: 'LG — modely typu Split',
+    description:
+      'Jsme hrdí na to, že nabízíme ta nejlepší řešení v oblasti vytápění. U tepelných čerpadel proto používáme pouze nejnovější jednotky LG, především modely typu Split — úsporný provoz po celý rok.',
+    usedFor: 'Vytápění a ohřev vody',
+    category: 'technologie-domu',
+  },
+  {
+    slug: 'klimatizace',
+    name: 'Klimatizace',
+    partner: 'Jednotky LG',
+    description:
+      'S jednotkami LG, které používáme, se můžete spolehnout na pohodlí v každém ročním období — aniž byste museli obětovat náklady na energie.',
+    usedFor: 'Chlazení interiéru',
+    category: 'technologie-domu',
+  },
+  {
+    slug: 'fotovoltaika',
+    name: 'Fotovoltaika',
+    partner: 'Návrh, výpočet a instalace',
+    description:
+      'Výroba čisté a obnovitelné energie se stala nedílnou součástí moderní domácnosti. Zajistíme výpočet i instalaci fotovoltaických panelů na míru vaší spotřebě — od návrhu po připojení.',
+    usedFor: 'Výroba vlastní energie',
+    category: 'technologie-domu',
+  },
   {
     slug: 'brousene-cihly',
     name: 'Broušené cihelné bloky',

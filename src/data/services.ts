@@ -5,6 +5,11 @@ export interface Faq {
   a: string;
 }
 
+export interface ProcessStep {
+  title: string;
+  text: string[];
+}
+
 export interface Service {
   slug: string;
   path: string;
@@ -15,6 +20,9 @@ export interface Service {
   description: string[];
   bullets: string[];
   faq: Faq[];
+  /** Volitelný postup realizace — číslované kroky na stránce služby */
+  processTitle?: string;
+  process?: ProcessStep[];
   category: string;
   children?: string[];
   parent?: string;
@@ -280,17 +288,75 @@ export const services: Service[] = [
     label: 'Fasády',
     lead: 'Provětrávané fasádní systémy s obkladem z desek, dřeva nebo plechu. Dlouhá životnost a prémiový vzhled.',
     description: [
-      'Provětrávaná fasáda odděluje izolaci od obkladu vzduchovou mezerou — konstrukce zůstává suchá a fasáda drží desítky let bez údržby.',
+      'Větrané fasády jsou stále na vzestupu, a to především díky svým nesporným výhodám a architektonickému působení.',
+      'Tyto systémy mají buď samostatnou předvěšenou část na nosném roštu fasády, který je mechanicky přikotven pomocí kotev k hlavní nosné konstrukci, nebo samonosnou předvěšenou část, nejčastěji z pohledových cihel či panelových bloků.',
+      'Na nosné konstrukci je aplikována tepelná izolace z důvodu požadavků na dodatečné zateplení v souladu se současnou normou ČSN 73 0540, ke které se vztahují i předpisy zakotvené v zákoně 177/2006 Sb.',
     ],
     bullets: [
-      'Cementovláknité a kompaktní desky',
-      'Dřevěné obklady — modřín, thermowood',
-      'Hliníkové nosné rošty',
+      'Klesající difuzní odpor směrem do exteriéru',
+      'Trvalá ochrana interiéru před přehříváním',
+      'Možnost libovolné tloušťky izolace',
+      'Zajištění stálého vysušování izolace',
+      'Možnost suché celoroční montáže',
+      'Estetické vlastnosti',
+    ],
+    processTitle: 'Postup montáže a nejčastější chyby',
+    process: [
+      {
+        title: 'Osazení kotevních prvků',
+        text: [
+          'Nejprve začneme osazením kotevních prvků budoucího roštu na nosnou podkladní konstrukci. Při použití ocelových prvků kotvení se doporučuje použít speciální podložky snižující tepelné mosty.',
+          'Fasádní konzoly používáme zásadně od firmy Hilti, která navrhne typ konzol včetně výpočtu jejich hustoty a následně zpracuje montážní projekt.',
+        ],
+      },
+      {
+        title: 'Vkládání tepelné izolace',
+        text: [
+          'Do větrané fasády se používají středně tuhé desky většinou čedičové izolace, například ISOVER Fassil či ISOVER Fassil NT.',
+          'Obvykle by měla být deska tepelné izolace zhruba o 1 cm širší než samotný rošt. V případě dodatečného kotvení pevnějších desek stačí šíře o 0,5 cm větší.',
+        ],
+      },
+      {
+        title: 'Ochrana tepelné izolace',
+        text: [
+          'Použití difuzních fólií na tepelnou izolaci je doporučené u větraných stěn, kde vrchní plášť fasády není celistvý a hrozí zafoukání vody či sněhu do prostoru větrané mezery.',
+          'Všechny desky tepelné izolace do větraných fasád jsou ale hydrofobizované, takže při jejich dočasném povrchovém smáčení je jejich funkce zachována a mezerami zafoukaná vlhkost vždy velmi rychle vyschne.',
+        ],
+      },
+      {
+        title: 'Pohledová vrstva',
+        text: [
+          'V současné době je na českém trhu nepřeberné množství materiálů a výrobků pro dokončení fasády.',
+          'Kromě standardních vláknocementových desek je možné použít dřevěné obklady, tenké kamenné desky, plech nebo některé „nové“ materiály, jako je dřevoplast.',
+        ],
+      },
+      {
+        title: 'Řešení detailů větrané mezery',
+        text: [
+          'Větraná mezera by měla mít minimální šíři 2 cm, doporučujeme ale 4 cm — tepelná izolace se může někdy boulit a v zúžené mezeře proudí vzduch hůře.',
+          'Důležitou součástí větrané mezery jsou také ochranné mřížky u nasávacího a výstupního otvoru. Slouží jako ochrana před drobnými hlodavci a ptáky, kteří by mohli do mezery zalézat.',
+        ],
+      },
+      {
+        title: 'Příprava vymezovacího roštu',
+        text: [
+          'Základem většiny větraných fasád je nosný rošt. Montuje se k nosné konstrukci svisle či vodorovně.',
+          'Obvykle se používá hliníkový rošt, lze ale použít také dřevěný, který lze udělat dvojitě křížem přes sebe. U halových objektů je rošt pevnou součástí obvodového pláště.',
+        ],
+      },
     ],
     faq: [
       {
         q: 'V čem je provětrávaná fasáda lepší než ETICS?',
         a: 'Delší životnost, odolnost proti mechanickému poškození a prémiový vzhled. Je ale dražší na pořízení.',
+      },
+      {
+        q: 'Jak široká má být větraná mezera?',
+        a: 'Minimálně 2 cm, doporučujeme ale 4 cm. V zúžené mezeře proudí vzduch hůře, protože se tepelná izolace může mírně boulit.',
+      },
+      {
+        q: 'Jaký obklad lze na provětrávanou fasádu použít?',
+        a: 'Vláknocementové desky, dřevěné obklady, tenké kamenné desky, plech nebo novější materiály, jako je dřevoplast.',
       },
     ],
     category: 'provetravane-fasady',
