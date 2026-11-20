@@ -14,7 +14,7 @@ const { project, number, ratio = 'aspect-[4/3]' } = Astro.props;
 
 <a href={`/realizace/${project.slug}`} class="group block" data-categories={project.categories.join(' ')}>
   <div class="relative overflow-hidden">
-    <PhotoPlaceholder label={project.title} ratio={ratio} />
+    <PhotoPlaceholder name={`project-${project.slug}`} label={`${project.title} — ${project.location}`} ratio={ratio} />
     <span class="absolute bottom-0 left-6 inline-flex items-center gap-3 bg-cihla px-5 py-3 text-sm font-semibold uppercase tracking-[0.1em] text-papir transition-colors duration-200 group-hover:bg-grafit">
       {number && <span class="font-light tabular-nums">{number}</span>}
       {project.title}

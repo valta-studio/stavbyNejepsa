@@ -53,7 +53,7 @@ const breadcrumbJsonLd = {
 
   <!-- Fullscreen hero s fotkou a obrysovým titulkem -->
   <section class="relative flex min-h-[85svh] flex-col justify-end">
-    <PhotoPlaceholder fill label={`Hero fotografie — ${service.title}`} />
+    <PhotoPlaceholder fill name={`service-${service.slug}`} eager label={service.title} />
     <div class="absolute inset-0 bg-gradient-to-t from-grafit/60 via-transparent to-grafit/30" aria-hidden="true"></div>
 
     <div class="relative z-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">

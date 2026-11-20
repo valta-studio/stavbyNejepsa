@@ -43,7 +43,7 @@ const jsonLd = branches.map((b) => ({
     {
       branches.map((b, i) => (
         <div class="bg-papir">
-          <PhotoPlaceholder label={`${b.name} — foto provozovny`} ratio="aspect-[16/9]" />
+          <PhotoPlaceholder name={i === 0 ? 'branch-praha' : 'branch-2'} label={`${b.name} — provozovna`} ratio="aspect-[16/9]" />
           <div class="p-8">
             <span class="text-3xl font-light tabular-nums text-cihla-dark">{String(i + 1).padStart(2, '0')}</span>
             <h2 class="mt-3 text-h3 font-bold">{b.name}</h2>

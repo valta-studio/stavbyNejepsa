@@ -25,7 +25,7 @@ const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
   <article>
     <!-- Fullscreen hero s obrysovým titulkem (vzor homepage slidů) -->
     <section class="relative flex min-h-svh flex-col justify-end">
-      <PhotoPlaceholder fill label={`${project.title} — hlavní fotografie`} />
+      <PhotoPlaceholder fill name={`project-${project.slug}`} eager label={`${project.title} — ${project.location}`} />
       <div class="absolute inset-0 bg-gradient-to-t from-grafit/60 via-transparent to-grafit/30" aria-hidden="true"></div>
 
       <div class="relative z-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">

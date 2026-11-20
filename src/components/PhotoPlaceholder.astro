@@ -1,23 +1,50 @@
 ---
-// Dočasný zástupce fotografie — fotografie realizací dodá klient.
-// Po napojení Sanity se nahradí <img> s transformacemi přes Sanity CDN.
+// Fotografie sekce: pokud existuje vygenerovaná/dodaná fotka (`name`), renderuje se
+// optimalizovaný <Image>; jinak zůstane placeholder. Po napojení Sanity se zdroj
+// vymění za Sanity CDN.
+import { Image } from 'astro:assets';
+import { getPhoto } from '../lib/photos';
+
 interface Props {
   label?: string;
   ratio?: string; // tailwind aspect-* hodnota
   fill?: boolean; // absolutně vyplní rodiče (fullscreen hero slidy)
+  name?: string; // název souboru v src/assets/photos (bez přípony)
+  eager?: boolean; // LCP obrázek: eager + fetchpriority=high
   class?: string;
 }
 const {
   label = 'Fotografie dodá klient',
   ratio = 'aspect-[16/9]',
   fill = false,
+  name,
+  eager = false,
   class: className = '',
 } = Astro.props;
+
+const photo = name ? getPhoto(name) : undefined;
 const sizing = fill ? 'absolute inset-0 h-full w-full' : `relative ${ratio} w-full`;
 ---
 
-<div class={`photo-placeholder ${sizing} overflow-hidden ${className}`} role="img" aria-label={label}>
-  <span class="absolute inset-0 flex items-center justify-center p-4 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-grafika">
-    {label}
-  </span>
-</div>
+{
+  photo ? (
+    <div class={`${sizing} overflow-hidden ${className}`}>
+      <Image
+        src={photo}
+        alt={label}
+        class="h-full w-full object-cover"
+        widths={[480, 800, 1344]}
+        sizes="(min-width: 1024px) 100vw, 100vw"
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : undefined}
+        decoding={eager ? undefined : 'async'}
+      />
+    </div>
+  ) : (
+    <div class={`photo-placeholder ${sizing} overflow-hidden ${className}`} role="img" aria-label={label}>
+      <span class="absolute inset-0 flex items-center justify-center p-4 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-grafika">
+        {label}
+      </span>
+    </div>
+  )
+}
