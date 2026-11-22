@@ -8,6 +8,9 @@ interface Props {
 
 const { href, variant = 'solid', arrow = false, class: className = '' } = Astro.props;
 
+// Externí odkazy (Google recenze apod.) otevírat v nové záložce, ať návštěvník neopustí web.
+const external = /^https?:\/\//.test(href);
+
 const base =
   'inline-flex items-center justify-center gap-3 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] transition-colors duration-200';
 
@@ -18,7 +21,11 @@ const variants = {
 };
 ---
 
-<a href={href} class={`${base} ${variants[variant]} ${className}`}>
+<a
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+  class={`${base} ${variants[variant]} ${className}`}>
   <slot />
   {arrow && <span aria-hidden="true" class="text-base leading-none">→</span>}
 </a>

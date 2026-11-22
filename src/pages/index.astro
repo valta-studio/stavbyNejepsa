@@ -74,11 +74,9 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
         mainServices.map((s) => (
           <a
             href={s.path}
-            class="group relative bg-papir px-5 py-5 text-base font-bold text-grafit transition-colors hover:bg-grafit hover:text-papir lg:px-7 lg:py-6 lg:text-lg"
+            class="group relative border border-zluta bg-papir px-5 py-5 text-base font-bold text-grafit shadow-[4px_4px_0_0_var(--color-zluta)] transition-all duration-200 ease-out hover:translate-x-[4px] hover:translate-y-[4px] hover:bg-zluta hover:shadow-[0_0_0_0_var(--color-zluta)] lg:px-7 lg:py-6 lg:text-lg lg:shadow-[6px_6px_0_0_var(--color-zluta)] lg:hover:translate-x-[6px] lg:hover:translate-y-[6px]"
           >
             {s.title}
-            <span class="absolute inset-x-0 bottom-0 h-1 bg-zluta" aria-hidden="true" />
-            <span aria-hidden="true" class="mt-1 block text-zluta-dark transition-transform duration-200 group-hover:translate-x-1.5 group-hover:text-zluta">→</span>
           </a>
         ))
       }

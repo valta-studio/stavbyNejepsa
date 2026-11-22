@@ -7,7 +7,11 @@ export const site = {
   email: 'nejepsa@stavbynejepsa.cz',
   instagramUrl: 'https://www.instagram.com/stavby_nejepsa_sro/',
   facebookUrl: 'https://www.facebook.com/StavbyNejepsa',
-  googleProfileUrl: 'https://www.google.com/maps', // TODO: odkaz na Google Business Profile
+  // Google vyhledávání firmy s otevřeným panelem recenzí (#sv). Osobní/sledovací
+  // parametry (sxsrf, ved, biw…) odstraněny. Až bude Place ID, nahradit trvalým
+  // odkazem https://search.google.com/local/reviews?placeid=…
+  googleProfileUrl:
+    'https://www.google.com/search?q=Stavby+Nejepsa+s.r.o&si=AE1YtOqiKPb2pdLXAi8quZ9vbH4aVq_aX8-3H9iFBLpRNK95c_dhLsOMWta8x6RBoz-_fXunRYQyExDth7FxfIFqsoPPnB_3GKCiMWCzOmgfK2fdLHyr6tc%3D&uds=AE2AFgabgnR72XAObCw-mUrB6FwyJPhBwImk25crlR8PJ-H9LYaBf4eZLw9iQF7TrhRhlQOKMy_bFd5_vsZutG-4xpmFHfMqKgWH0jPKnUwDio0K1DeTpFS4VCmGeHAaNx7_vPmuyXlv#sv=CAESzQEKuQEStgEKd0FERGJXZWFyVUlkR0VqcW54cjRvSlJnZjVPOVhQWnZwY1B4ZDEwRlZyX3BSb3pmeFJDeEdJTnh5WnFOT2tvb2ttOUdYYkU2WlFieHlMUktiT2pOZWtOdDBSaG5acVdNd1lOM3ZkUWJJc1dqZ0I1TVRTSFVFRnNNEhdERkFEYV9tSkU5Sy13UEFQOFplLXFRNBoiQUhOMEU3RzFzUnZmRW5XdmRIQlZWdTNSSmxYdlI4c29yZxIEODA1MRoBMyoAMAA4AUAAGAAg1LPQvQhKAhAB',
   ico: '18013392',
   dic: 'CZ18013392',
   address: {

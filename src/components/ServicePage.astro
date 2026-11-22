@@ -92,7 +92,7 @@ const breadcrumbJsonLd = {
       {
         service.bullets.map((b) => (
           <li class="flex items-start gap-3 text-body font-medium">
-            <LogoMark class="mt-[0.45em] w-4 shrink-0 text-zluta-dark" />
+            <LogoMark class="mt-[0.45em] w-4 shrink-0 text-zluta-dark max-sm:hidden" />
             {b}
           </li>
         ))
@@ -110,7 +110,7 @@ const breadcrumbJsonLd = {
         <div class="mt-10 overflow-hidden">
           <ul class="-ml-px -mt-px grid md:grid-cols-2 lg:grid-cols-3">
             {service.highlights.map((h) => (
-              <li class="border-l border-t border-grafit/10 p-7 text-body font-medium">{h}</li>
+              <li class="border-t border-grafit/10 py-5 text-body font-medium md:border-l md:p-7">{h}</li>
             ))}
           </ul>
         </div>
