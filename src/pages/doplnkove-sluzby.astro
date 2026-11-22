@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BackButton from '../components/BackButton.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import CtaSection from '../components/CtaSection.astro';
 
@@ -71,6 +72,7 @@ const doplnkoveSluzby: DoplnkovaSluzba[] = [
   description="Projektování, vyřízení dotace Nová zelená úsporám, stavební povolení a financování na míru. Postaráme se o vše kolem stavby, abyste nemuseli běhat po úřadech."
 >
   <section class="mx-auto max-w-7xl px-5 pb-12 pt-6 lg:px-8 lg:pt-10">
+    <BackButton href="/" variant="inline" />
     <SectionLabel>Doplňkové služby</SectionLabel>
     <h1 class="mt-4 text-display font-bold">Doplňkové služby</h1>
     <p class="mt-6 max-w-2xl text-body text-grafika">

@@ -2,6 +2,7 @@
 // Renderer bloků ve struktuře Sanity Portable Text (viz projectBodies.ts).
 // Po napojení CMS se jen vymění zdroj bloků — mapování typů zůstává.
 import PhotoPlaceholder from './PhotoPlaceholder.astro';
+import LogoMark from './LogoMark.astro';
 import type { RichTextBlock } from '../data/projectBodies';
 
 interface Props {
@@ -31,7 +32,7 @@ const { blocks } = Astro.props;
           <ul class="my-6 max-w-[62ch] space-y-3">
             {b.items.map((item) => (
               <li class="flex items-start gap-3 text-body font-medium">
-                <span aria-hidden="true" class="text-zluta-dark">→</span>
+                <LogoMark class="mt-[0.45em] w-4 shrink-0 text-zluta-dark" />
                 {item}
               </li>
             ))}
@@ -46,8 +47,8 @@ const { blocks } = Astro.props;
       }
       if (b.style === 'blockquote') {
         return (
-          <blockquote class="clear-both my-10 max-w-4xl border-l-4 border-zluta pl-6 text-h3 font-medium leading-snug text-grafit">
-            {b.text}
+          <blockquote class="clear-both my-10 max-w-[62ch] border-l-4 border-zluta pl-6 text-body">
+            <p class="text-h3 font-medium leading-snug text-grafit">{b.text}</p>
           </blockquote>
         );
       }

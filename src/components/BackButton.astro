@@ -3,26 +3,44 @@
 // Když uživatel přišel z jiné stránky webu, vrací se historií (zachová scroll pozici výpisu),
 // jinak (přímý vstup, Google, reklama) vede na nadřazenou stránku `href`.
 // Slot = další akce zobrazené vedle tlačítka (např. scroll na detail).
+// Varianta `overlay` = přes tmavou hero fotku (absolutně), `inline` = na světlém pozadí v toku stránky.
 interface Props {
   /** Nadřazená stránka — cíl, když nelze jít zpět historií */
   href: string;
+  variant?: 'overlay' | 'inline';
+  class?: string;
 }
 
-const { href } = Astro.props;
+const { href, variant = 'overlay', class: className = '' } = Astro.props;
+const overlay = variant === 'overlay';
 ---
 
-<div class="absolute left-5 top-24 z-20 flex flex-wrap items-center gap-x-8 gap-y-4 lg:left-8 lg:top-28">
+<div
+  class:list={[
+    'flex flex-wrap items-center gap-x-8 gap-y-4',
+    overlay ? 'absolute left-5 top-24 z-20 lg:left-8 lg:top-28' : 'mb-8',
+    className,
+  ]}
+>
 <a
   href={href}
   data-back-button
-  class="group inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em] text-papir"
+  class:list={[
+    'group inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.15em]',
+    overlay ? 'text-papir' : 'text-grafit',
+  ]}
 >
-  <span class="flex h-11 w-11 items-center justify-center rounded-full border border-papir/60 bg-grafit/20 backdrop-blur-sm transition-colors group-hover:border-zluta group-hover:bg-zluta group-hover:text-grafit">
+  <span
+    class:list={[
+      'flex h-11 w-11 items-center justify-center rounded-full border transition-colors group-hover:border-zluta group-hover:bg-zluta group-hover:text-grafit',
+      overlay ? 'border-papir/60 bg-grafit/20 backdrop-blur-sm' : 'border-grafit/25',
+    ]}
+  >
     <svg class="h-5 w-5 transition-transform duration-200 group-hover:-translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M19 12H5M12 19l-7-7 7-7" />
     </svg>
   </span>
-  <span class="transition-colors group-hover:text-zluta">Zpět</span>
+  <span class:list={['transition-colors', overlay ? 'group-hover:text-zluta' : 'group-hover:text-zluta-dark']}>Zpět</span>
 </a>
 <slot />
 </div>

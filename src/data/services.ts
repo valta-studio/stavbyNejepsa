@@ -184,22 +184,77 @@ export const services: Service[] = [
     processTitle: 'Jak stavíme zděné domy',
     process: [
       {
-        title: 'Zdivo Porotherm',
+        title: 'Příprava staveniště',
         text: [
-          'Nejpoužívanější cihly jsou Porotherm 30 Profi nebo 24 Profi. Nabízejí jednoduchou a čistou technologii zdění.',
-          'Zdivo je broušené, a tudíž se zdí na tenkovrstvou maltu (lepidlo) nebo na pěnu.',
+          'Po převzetí staveniště zajistíme vytyčení stavby geodetem, sejmeme ornici a připravíme zařízení staveniště — přípojku elektřiny a vody, skládku materiálu a příjezd pro techniku.',
         ],
       },
       {
-        title: 'Omítky a zateplení',
+        title: 'Základy a hydroizolace',
         text: [
-          'Zevnitř se zdivo omítá jádrovou nebo sádrovou omítkou, zvenku se lepí kontaktní zateplovací systém.',
+          'Vykopeme a vybetonujeme základové pasy, vyzdíme ztracené bednění a vylijeme základovou desku vyztuženou ocelovou výztuží. Předem do ní osadíme ležatou kanalizaci a chráničky pro přípojky.',
+          'Na desku položíme hydroizolaci proti zemní vlhkosti, případně i proti radonu podle výsledku radonového průzkumu.',
+        ],
+      },
+      {
+        title: 'Zdivo Porotherm',
+        text: [
+          'Nejpoužívanější cihly jsou Porotherm 30 Profi nebo 24 Profi. Nabízejí jednoduchou a čistou technologii zdění.',
+          'První řadu cihel založíme do vyrovnávací malty přesně do roviny. Zdivo je broušené, a tudíž se další řady zdí na tenkovrstvou maltu (lepidlo) nebo na pěnu.',
+        ],
+      },
+      {
+        title: 'Překlady a věnec',
+        text: [
+          'Nad okenní a dveřní otvory osadíme keramické překlady podle projektu. Obvodové zdivo v úrovni stropu ztužíme železobetonovým věncem, který spojí stěny se stropní konstrukcí.',
         ],
       },
       {
         title: 'Strop',
         text: [
           'Na druhé podlaží používáme stropní systém z trámů POT a vložek MIAKO, který se po montáži zalije betonovou zálivkou podle projektové dokumentace.',
+        ],
+      },
+      {
+        title: 'Krov a střecha',
+        text: [
+          'Krov nebo příhradové vazníky postaví naši tesaři, následuje střešní plášť z pálené, betonové nebo plechové krytiny včetně klempířských prvků. Uzavřením střechy je hrubá stavba chráněná před počasím.',
+        ],
+      },
+      {
+        title: 'Okna a dveře',
+        text: [
+          'Osadíme okna a vchodové dveře a připojovací spáry utěsníme páskami, aby napojení na zdivo bylo vzduchotěsné a nevznikaly v něm tepelné mosty.',
+        ],
+      },
+      {
+        title: 'Rozvody instalací',
+        text: [
+          'Do zdiva a podlah vedeme rozvody elektřiny, vody, kanalizace a vytápění. Vše probíhá před omítkami, aby rozvody zůstaly skryté a nebylo nutné do hotových povrchů zasahovat.',
+        ],
+      },
+      {
+        title: 'Vnitřní omítky',
+        text: [
+          'Zevnitř se zdivo omítá jádrovou nebo sádrovou omítkou. Omítka zároveň zajistí vzduchotěsnost obvodových stěn.',
+        ],
+      },
+      {
+        title: 'Podlahy',
+        text: [
+          'Na tepelnou a kročejovou izolaci vylijeme betonový nebo anhydritový potěr, do kterého lze uložit i podlahové topení.',
+        ],
+      },
+      {
+        title: 'Fasáda a zateplení',
+        text: [
+          'Zvenku se na zdivo lepí kontaktní zateplovací systém z materiálů Cemix. Fasádu dokončíme finální probarvenou omítkou.',
+        ],
+      },
+      {
+        title: 'Dokončení a předání',
+        text: [
+          'Následují obklady, dlažby, malby, osazení dveří, sanity a kompletace elektroinstalace. Po finálním úklidu vám dům předáme připravený k nastěhování.',
         ],
       },
     ],
@@ -432,17 +487,43 @@ export const services: Service[] = [
     label: 'Fasády',
     lead: 'Certifikované kontaktní zateplovací systémy ETICS s polystyrenem nebo minerální vatou. Včetně zajištění dotace.',
     description: [
-      'Zateplujeme certifikovanými systémy a podle montážních předpisů výrobce — jen tak platí záruka a tepelné parametry z projektu.',
+      'Kontaktní zateplovací systém (ETICS) je v podmínkách České republiky nejpoužívanějším způsobem zateplení objektů. Tato technologie umožňuje jednoduchým způsobem vytvářet sendvičové stěny vynikajících parametrů.',
+      'Výhodou kontaktního zateplení je, že jeho přednosti lze rychle a účinně využít jak u novostaveb, tak u rekonstrukcí (dodatečného zateplování). Doplněním kvalitní tepelné izolace z minerální vlny či EPS ke stávající stěně získáte mimořádně účinnou konstrukci se souvislou tepelnou izolací.',
+      'Na kontaktní zateplovací systém používáme výhradně výrobky značky Cemix, která nám podle projektu navrhne veškerý použitý materiál. Zateplujeme podle montážních předpisů výrobce — jen tak platí záruka a tepelné parametry z projektu.',
     ],
     bullets: [
       'EPS i minerální vata',
+      'Novostavby i dodatečné zateplení při rekonstrukci',
+      'Materiály Cemix navržené podle projektu',
       'Systémové řešení detailů (okna, sokl, atika)',
       'Podklady pro dotaci Nová zelená úsporám',
+    ],
+    highlightsLabel: 'Výhody',
+    highlightsTitle: 'Výhody kontaktního zateplení',
+    highlights: [
+      'Tradiční, dobře známý a ověřený způsob zateplení',
+      'Levnější varianta než provětrávané fasádní systémy',
+      'Souvislé zateplení po celé ploše fasády bez tepelných mostů',
+      'Ochrana objektu před teplotními výkyvy — v zimě se konstrukce neprochlazuje, v létě se nepřehřívá',
+      'Zachování tepelné akumulace zdiva pro stabilní tepelnou pohodu v interiéru',
+      'Vhodné pro novostavby i rekonstrukce',
     ],
     faq: [
       {
         q: 'Polystyren, nebo vata?',
         a: 'Záleží na konstrukci a požární výšce. Doporučení dostanete při zaměření spolu s cenovým srovnáním.',
+      },
+      {
+        q: 'Jaký je rozdíl mezi kontaktním zateplením a provětrávanou fasádou?',
+        a: 'Kontaktní zateplovací systém je levnější a izolace je souvislá po celé ploše fasády, takže nevznikají tepelné mosty. Provětrávaná fasáda je dražší, nabízí ale delší životnost, vyšší odolnost proti poškození a prémiový vzhled.',
+      },
+      {
+        q: 'Dá se kontaktní zateplení udělat i na starší dům?',
+        a: 'Ano. Kontaktní zateplení je vhodné jak pro novostavby, tak pro dodatečné zateplení při rekonstrukci — izolace z minerální vlny nebo EPS se doplní ke stávající stěně.',
+      },
+      {
+        q: 'Jaké materiály používáte?',
+        a: 'Výhradně systémové výrobky značky Cemix, která nám podle projektu navrhne veškerý použitý materiál.',
       },
     ],
     category: 'zatepleni',

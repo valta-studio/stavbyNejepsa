@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BackButton from '../components/BackButton.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import Button from '../components/Button.astro';
 import { site, contacts, tel } from '../data/site';
@@ -41,6 +42,7 @@ const jsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <section class="mx-auto max-w-7xl px-5 pb-12 pt-6 lg:px-8 lg:pt-10">
+    <BackButton href="/" variant="inline" />
     <SectionLabel>Spojte se s námi</SectionLabel>
     <h1 class="mt-4 text-display font-bold">Kontakt</h1>
     <p class="mt-6 max-w-2xl text-body text-grafika">
