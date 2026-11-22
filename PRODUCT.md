@@ -29,7 +29,7 @@ Zákazník typicky porovnává více stavebních firem, prohlíží realizace a 
 ## Capabilities and Constraints
 
 - Plně statický web: Astro 5 (`output: 'static'`), Tailwind CSS 4, Poppins self-hosted přes `@fontsource/poppins` (žádné CDN fonty).
-- Data v `src/data/` (service, project, technology) zrcadlí budoucí Sanity content model — při napojení CMS se mění jen zdroj dat, komponenty zůstávají.
+- Realizace (`project`) se spravují v Sanity Studiu (`studio/`) a načítají se při buildu; služby, technologie a kontakty zůstávají v `src/data/`.
 - Jazyk webu: čeština.
 - Otevřené body: odkaz na Google Business Profile (TODO v `src/data/site.ts`), pozice Marka Beňa (na původním webu neuvedena).
 

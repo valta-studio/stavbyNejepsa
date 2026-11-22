@@ -1,17 +1,13 @@
 ---
-// Renderer bloků ve struktuře Sanity Portable Text (viz projectBodies.ts).
-// Po napojení CMS se jen vymění zdroj bloků — mapování typů zůstává.
+// Renderer textu realizace — bloky převedené ze Sanity Portable Text (viz data/projects.ts).
 import PhotoPlaceholder from './PhotoPlaceholder.astro';
 import LogoMark from './LogoMark.astro';
-import type { RichTextBlock } from '../data/projectBodies';
+import type { RichTextBlock } from '../data/projects';
 
 interface Props {
   blocks: RichTextBlock[];
 }
 const { blocks } = Astro.props;
-
-// Všechny obrázky se renderují přes celou šířku obsahu.
-// Pole `layout` v datech zůstává kvůli kompatibilitě se Sanity schématem, ale ignoruje se.
 ---
 
 <div class="rich-text">
@@ -20,7 +16,7 @@ const { blocks } = Astro.props;
       if (b._type === 'imageWithMeta') {
         return (
           <figure class="clear-both my-10 max-w-[62ch] text-body">
-            <PhotoPlaceholder name={b.name} label={b.alt} ratio="aspect-[3/2]" sizes="(min-width: 768px) 701px, 100vw" />
+            <PhotoPlaceholder src={b.src} name={b.name} label={b.alt} ratio="aspect-[3/2]" sizes="(min-width: 768px) 701px, 100vw" />
             {b.caption && (
               <figcaption class="mt-3 border-l-2 border-zluta pl-4 text-sm text-grafika">{b.caption}</figcaption>
             )}

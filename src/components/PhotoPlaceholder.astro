@@ -1,7 +1,6 @@
 ---
-// Fotografie sekce: pokud existuje vygenerovaná/dodaná fotka (`name`), renderuje se
-// optimalizovaný <Image>; jinak zůstane placeholder. Po napojení Sanity se zdroj
-// vymění za Sanity CDN.
+// Fotografie sekce: fotka ze Sanity (`src`) se renderuje přes Sanity CDN; jinak lokální
+// fotka (`name`) přes optimalizovaný <Image>; bez obojího zůstane placeholder.
 import { Image } from 'astro:assets';
 import { getPhoto } from '../lib/photos';
 
@@ -9,6 +8,7 @@ interface Props {
   label?: string;
   ratio?: string; // tailwind aspect-* hodnota
   fill?: boolean; // absolutně vyplní rodiče (fullscreen hero slidy)
+  src?: string | null; // URL fotky ze Sanity — má přednost před `name`
   name?: string; // název souboru v src/assets/photos (bez přípony)
   eager?: boolean; // LCP obrázek: eager + fetchpriority=high
   sizes?: string; // skutečná šířka slotu v layoutu — řídí výběr kandidáta z widths
@@ -18,24 +18,40 @@ const {
   label = 'Fotografie dodá klient',
   ratio = 'aspect-[16/9]',
   fill = false,
+  src,
   name,
   eager = false,
   sizes = '100vw',
   class: className = '',
 } = Astro.props;
 
-const photo = name ? getPhoto(name) : undefined;
+const photo = !src && name ? getPhoto(name) : undefined;
+const widths = [480, 800, 1344];
+const cdn = (w: number) => `${src}?w=${w}&fit=max&auto=format`;
 const sizing = fill ? 'absolute inset-0 h-full w-full' : `relative ${ratio} w-full`;
 ---
 
 {
-  photo ? (
-    <div class={`${sizing} overflow-hidden ${className}`}>
+  src ? (
+    <div class={`img-skeleton ${sizing} overflow-hidden ${className}`}>
+      <img
+        src={cdn(1344)}
+        srcset={widths.map((w) => `${cdn(w)} ${w}w`).join(', ')}
+        sizes={sizes}
+        alt={label}
+        class="h-full w-full object-cover"
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : undefined}
+        decoding={eager ? undefined : 'async'}
+      />
+    </div>
+  ) : photo ? (
+    <div class={`img-skeleton ${sizing} overflow-hidden ${className}`}>
       <Image
         src={photo}
         alt={label}
         class="h-full w-full object-cover"
-        widths={[480, 800, 1344]}
+        widths={widths}
         sizes={sizes}
         loading={eager ? 'eager' : 'lazy'}
         fetchpriority={eager ? 'high' : undefined}
@@ -50,3 +66,17 @@ const sizing = fill ? 'absolute inset-0 h-full w-full' : `relative ${ratio} w-fu
     </div>
   )
 }
+
+<script>
+  // Skeleton → fotka: po dokončení stahování přidá .is-loaded (fade-in v global.css).
+  // `complete` pokrývá fotky načtené z cache dřív, než tento skript doběhl.
+  for (const img of document.querySelectorAll<HTMLImageElement>('.img-skeleton > img')) {
+    const reveal = () => img.classList.add('is-loaded');
+    if (img.complete) {
+      reveal();
+    } else {
+      img.addEventListener('load', reveal, { once: true });
+      img.addEventListener('error', reveal, { once: true });
+    }
+  }
+</script>

@@ -1,5 +1,10 @@
-// Zrcadlí budoucí Sanity dokument `project` (realizace).
-// Fotografie dodá klient — zatím placeholdery.
+// Realizace se spravují v Sanity Studiu (studio/, dokument `project`) a načítají se při buildu.
+import { sanityFetch } from '../lib/sanity';
+
+export type RichTextBlock =
+  | { _type: 'block'; style: 'h2' | 'h3' | 'normal' | 'blockquote'; text: string }
+  | { _type: 'bulletList'; items: string[] }
+  | { _type: 'imageWithMeta'; src?: string | null; name?: string; alt: string; caption?: string };
 
 export interface Project {
   slug: string;
@@ -11,127 +16,65 @@ export interface Project {
   technologies: string[]; // slugy z technologies.ts
   featured: boolean;
   description: string;
-  galleryCount: number;
-  /** Popisky fází výstavby — fotky `gallery-<slug>-1..4` v src/assets/photos */
-  stages: [string, string, string, string];
+  /** URL fotky ze Sanity; bez ní se použije `project-<slug>` ze src/assets/photos */
+  image: string | null;
+  /** Fáze výstavby; bez fotky se použije `gallery-<slug>-<pořadí>` ze src/assets/photos */
+  stages: { title: string; image: string | null }[];
+  body: RichTextBlock[];
 }
 
-export const defaultStages: [string, string, string, string] = [
-  'Základy a příprava',
-  'Hrubá stavba',
-  'Dokončovací práce',
-  'Hotová stavba',
-];
+interface PortableBlock {
+  _type: 'block' | 'image';
+  style?: string;
+  listItem?: string;
+  children?: { text: string }[];
+  src?: string | null;
+  placeholder?: string;
+  alt?: string;
+  caption?: string;
+}
 
-export const projects: Project[] = [
-  {
-    slug: 'villa-za-prahou',
-    title: 'Villa za Prahou',
-    location: 'Praha-východ',
-    year: 2024,
-    categories: ['rodinne-domy', 'drevostavby'],
-    scope: ['Dřevostavba na klíč', 'Plochá střecha', 'Dřevěná fasáda'],
-    technologies: ['kvh-bsh', 'pvc-folie'],
-    featured: true,
-    description:
-      'Moderní dřevostavba s plochou střechou a modřínovou provětrávanou fasádou. Kompletní realizace na klíč od základové desky po terénní úpravy.',
-    galleryCount: 6,
-    stages: ['Základová deska', 'Montáž dřevostavby', 'Fasáda a interiéry', 'Hotová vila'],
-  },
-  {
-    slug: 'rodinny-dum-beroun',
-    title: 'Rodinný dům Beroun',
-    location: 'Beroun',
-    year: 2023,
-    categories: ['rodinne-domy', 'zdene-domy'],
-    scope: ['Zděný dům na klíč', 'Šikmá střecha', 'Zateplení ETICS'],
-    technologies: ['brousene-cihly', 'betonova-taska', 'etics'],
-    featured: true,
-    description:
-      'Zděná novostavba 5+kk z broušených cihelných bloků se sedlovou střechou z betonové krytiny a kontaktním zateplením.',
-    galleryCount: 6,
-    stages: ['Základy', 'Hrubá stavba zdiva', 'Střecha a omítky', 'Hotový dům'],
-  },
-  {
-    slug: 'rekonstrukce-bytu-vinohrady',
-    title: 'Rekonstrukce bytu Vinohrady',
-    location: 'Praha 2',
-    year: 2024,
-    categories: ['rekonstrukce'],
-    scope: ['Kompletní rekonstrukce', 'Dispoziční změny', 'Nové rozvody'],
-    technologies: [],
-    featured: true,
-    description:
-      'Kompletní rekonstrukce bytu 4+1 v činžovním domě — nové dispozice, rozvody, podlahy, koupelny i truhlářské prvky na míru.',
-    galleryCount: 5,
-    stages: ['Bourací práce', 'Nové rozvody a příčky', 'Povrchy a podlahy', 'Hotový byt'],
-  },
-  {
-    slug: 'plocha-strecha-kladno',
-    title: 'Plochá střecha bytového domu',
-    location: 'Kladno',
-    year: 2023,
-    categories: ['strechy', 'ploche-strechy'],
-    scope: ['Nová skladba ploché střechy', 'Zateplení', 'PVC fólie'],
-    technologies: ['pvc-folie', 'spadove-kliny'],
-    featured: false,
-    description:
-      'Rekonstrukce ploché střechy bytového domu — nová spádová vrstva, zateplení a hydroizolace z PVC fólie včetně odvodnění.',
-    galleryCount: 4,
-    stages: ['Demontáž staré skladby', 'Spádové klíny a izolace', 'Pokládka PVC fólie', 'Hotová střecha'],
-  },
-  {
-    slug: 'sikma-strecha-dobris',
-    title: 'Šikmá střecha RD Dobříš',
-    location: 'Dobříš',
-    year: 2022,
-    categories: ['strechy', 'sikme-strechy'],
-    scope: ['Nový krov', 'Betonová krytina', 'Klempířské prvky'],
-    technologies: ['betonova-taska', 'kvh-bsh'],
-    featured: false,
-    description:
-      'Výměna krovu a kompletní nová střecha rodinného domu — betonová krytina, nadkrokevní izolace a klempířské prvky z titanzinku.',
-    galleryCount: 4,
-    stages: ['Demontáž a krov', 'Fólie a laťování', 'Pokládka krytiny', 'Hotová střecha'],
-  },
-  {
-    slug: 'zatepleni-pribram',
-    title: 'Zateplení RD Příbram',
-    location: 'Příbram',
-    year: 2024,
-    categories: ['fasady', 'zatepleni'],
-    scope: ['Zateplení ETICS', 'Silikonová omítka', 'Nový sokl'],
-    technologies: ['etics'],
-    featured: false,
-    description:
-      'Kontaktní zateplení rodinného domu šedým polystyrenem se silikonovou omítkou, včetně soklu a nových parapetů.',
-    galleryCount: 4,
-    stages: ['Založení systému', 'Lepení izolantu', 'Stěrka a omítka', 'Hotová fasáda'],
-  },
-  {
-    slug: 'provetravana-fasada-admin',
-    title: 'Provětrávaná fasáda administrativní budovy',
-    location: 'Praha-západ',
-    year: 2023,
-    categories: ['fasady', 'provetravane-fasady'],
-    scope: ['Provětrávaná fasáda', 'Cementovláknité desky', 'Hliníkový rošt'],
-    technologies: ['cementovlaknite-desky'],
-    featured: false,
-    description:
-      'Opláštění administrativní budovy provětrávanou fasádou z cementovláknitých desek na hliníkovém roštu.',
-    galleryCount: 5,
-    stages: ['Nosný rošt', 'Izolace a fólie', 'Montáž desek', 'Hotová fasáda'],
-  },
-];
+// Portable Text ze Sanity → bloky, které vykresluje RichText.astro.
+function toRichText(body: PortableBlock[]): RichTextBlock[] {
+  const out: RichTextBlock[] = [];
+  for (const b of body) {
+    if (b._type === 'image') {
+      out.push({ _type: 'imageWithMeta', src: b.src, name: b.placeholder, alt: b.alt ?? '', caption: b.caption });
+      continue;
+    }
+    const text = (b.children ?? []).map((c) => c.text).join('');
+    const last = out.at(-1);
+    if (b.listItem && last?._type === 'bulletList') last.items.push(text);
+    else if (b.listItem) out.push({ _type: 'bulletList', items: [text] });
+    else out.push({ _type: 'block', style: (b.style ?? 'normal') as 'normal', text });
+  }
+  return out;
+}
+
+const query = `*[_type == "project" && defined(slug.current)] | order(year desc, title asc) {
+  "slug": slug.current,
+  title,
+  location,
+  year,
+  description,
+  "featured": coalesce(featured, false),
+  "categories": coalesce(categories, []),
+  "scope": coalesce(scope, []),
+  "technologies": coalesce(technologies, []),
+  "image": image.asset->url,
+  "stages": coalesce(stages[]{title, "image": image.asset->url}, []),
+  "body": coalesce(body[]{..., "src": asset->url}, [])
+}`;
+
+type RawProject = Omit<Project, 'body'> & { body: PortableBlock[] };
+
+export const projects: Project[] = (await sanityFetch<RawProject[]>(query)).map((p) => ({
+  ...p,
+  body: toRichText(p.body),
+}));
 
 export const featuredProjects = projects.filter((p) => p.featured);
 
 export function projectsByCategory(category: string): Project[] {
   return projects.filter((p) => p.categories.includes(category));
-}
-
-export function getProject(slug: string): Project {
-  const p = projects.find((x) => x.slug === slug);
-  if (!p) throw new Error(`Project not found: ${slug}`);
-  return p;
 }
