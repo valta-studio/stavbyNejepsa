@@ -13,6 +13,6 @@
     "noUncheckedSideEffectImports": false,
     "incremental": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", ".sanity/**/*"],
   "exclude": ["node_modules"]
 }

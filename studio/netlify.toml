@@ -1,0 +1,10 @@
+# Netlify site se Studiem: base directory = studio
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Studio je SPA — všechny adresy obsluhuje index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
