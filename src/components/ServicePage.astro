@@ -54,7 +54,7 @@ const breadcrumbJsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
 
   <!-- Fullscreen hero s fotkou a obrysovým titulkem -->
-  <section class="relative flex min-h-[85svh] flex-col justify-end">
+  <section class="relative flex min-h-[calc(var(--hero-h)*0.85)] flex-col justify-end">
     <PhotoPlaceholder fill name={`service-${service.slug}`} eager label={service.title} />
     <div class="absolute inset-0 bg-gradient-to-t from-grafit/75 via-transparent to-grafit/70" aria-hidden="true"></div>
     <BackButton href={parent?.path ?? '/'} />

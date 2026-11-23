@@ -32,7 +32,7 @@ const posterSrc = project.image ?? getPhoto(`project-${project.slug}`)?.src;
 <Layout title={project.title} description={project.description} headerVariant="overlay">
   <article>
     <!-- Fullscreen hero s obrysovým titulkem (vzor homepage slidů) -->
-    <section class="relative flex min-h-svh flex-col justify-end">
+    <section class="relative flex min-h-(--hero-h) flex-col justify-end">
       <PhotoPlaceholder fill src={project.image} name={`project-${project.slug}`} eager label={`${project.title} — ${project.location}`} />
       <div class="absolute inset-0 bg-gradient-to-t from-grafit/75 via-transparent to-grafit/70" aria-hidden="true"></div>
       <BackButton href="/realizace">

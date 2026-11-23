@@ -55,7 +55,7 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
   headerVariant="overlay"
 >
   <!-- Fullscreen hero s kartami hlavních služeb -->
-  <section id="uvod" class="relative flex min-h-svh flex-col">
+  <section id="uvod" class="relative flex min-h-(--hero-h) flex-col">
     <PhotoPlaceholder fill name="home-hero" eager label="Moderní rodinný dům na klíč s dřevěnou fasádou" />
     <div class="absolute inset-0 bg-gradient-to-t from-grafit/70 via-grafit/20 to-grafit/30" aria-hidden="true"></div>
 
@@ -86,7 +86,7 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
   <!-- Vybrané realizace přes celou obrazovku -->
   {
     slides.map((p, i) => (
-      <section id={`projekt-${i + 1}`} class="relative flex min-h-svh flex-col justify-end">
+      <section id={`projekt-${i + 1}`} class="relative flex min-h-(--hero-h) flex-col justify-end">
         <PhotoPlaceholder fill src={p.image} name={`project-${p.slug}`} label={`${p.title} — ${p.location}`} />
         <div class="absolute inset-0 bg-gradient-to-t from-grafit/80 via-transparent to-transparent" aria-hidden="true" />
 

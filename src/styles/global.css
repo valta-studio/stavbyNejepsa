@@ -40,6 +40,14 @@
   }
 }
 
+/* Výška fullscreen hero sekcí. In-app prohlížeče (Messenger, Instagram…) mění velikost
+   celého webview, když se jejich lišta při scrollu schovává — přepočítávají se tam i svh
+   jednotky a hero sekce (a s nimi celá stránka) při scrollu poskakují. Skript v Layout.astro
+   proto výšku jednou zafixuje v px; 100svh je fallback bez JS. */
+:root {
+  --hero-h: 100svh;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;

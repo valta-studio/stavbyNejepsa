@@ -58,6 +58,21 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <!-- TODO: OG karta zatím s textovým logem — po dodání vektorového loga přegenerovat -->
+    <script is:inline>
+      // Zafixuje --hero-h v px, přepočítá jen při změně šířky (otočení telefonu).
+      // Změny pouze výšky (schovávání lišty in-app prohlížečů, klávesnice) ignoruje,
+      // jinak by fullscreen sekce při scrollu měnily výšku a obsah by skákal.
+      (() => {
+        let w = 0;
+        const set = () => {
+          if (window.innerWidth === w) return;
+          w = window.innerWidth;
+          document.documentElement.style.setProperty('--hero-h', window.innerHeight + 'px');
+        };
+        set();
+        window.addEventListener('resize', set);
+      })();
+    </script>
   </head>
   <body class="flex min-h-screen flex-col">
     <Header variant={headerVariant} />
