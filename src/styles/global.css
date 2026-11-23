@@ -139,6 +139,23 @@ body {
   content: none;
 }
 
+/* Text loga: do 100 px scrollu platí původní barvy stránky (.logo-text-original),
+   pak se prolne do blend vrstvy (.logo-text-blend), která se barví podle podkladu.
+   Třídu logo-scrolled přepíná skript v Header.astro. */
+.logo-text-original,
+.logo-text-blend {
+  transition: opacity 0.25s ease;
+}
+.logo-text-blend {
+  opacity: 0;
+}
+html.logo-scrolled .logo-text-blend {
+  opacity: 1;
+}
+html.logo-scrolled .logo-text-original {
+  opacity: 0;
+}
+
 /* Logo značka na světlém pozadí: žlutá výplň + tenká grafitová kontura (čitelnost na betonu) */
 .logo-mark-outline path {
   stroke: var(--color-grafit);
