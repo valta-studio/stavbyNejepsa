@@ -142,7 +142,7 @@ const latest = [...projects].sort((a, b) => b.year - a.year).slice(0, 4);
       <div class="mt-12 grid gap-px bg-grafit/10 sm:grid-cols-2 lg:grid-cols-3">
         {
           technologies.map((t) => (
-            <div class="bg-beton p-7">
+            <div class="bg-beton py-7 sm:px-7">
               <p class="text-xs font-semibold uppercase tracking-[0.15em] text-grafika">{t.usedFor}</p>
               <h3 class="mt-2 text-lg font-bold">{t.name}</h3>
             </div>

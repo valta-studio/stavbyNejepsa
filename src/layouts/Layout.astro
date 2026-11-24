@@ -76,8 +76,6 @@ const ogImageUrl = new URL(ogImage, Astro.site);
   </head>
   <body class="flex min-h-screen flex-col">
     <Header variant={headerVariant} />
-    <!-- Safari (iOS 26) barví spodní lištu podle fixního prvku u spodního okraje — bez něj je lišta průhledná přes obsah -->
-    <div aria-hidden="true" class="pointer-events-none fixed inset-x-0 bottom-0 z-40 h-px bg-beton lg:hidden"></div>
     <main class={`flex-1 ${headerVariant === 'light' ? 'pt-24 lg:pt-28' : ''}`}>
       <slot />
     </main>
