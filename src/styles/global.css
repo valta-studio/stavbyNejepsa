@@ -162,3 +162,67 @@ html.logo-scrolled .logo-text-original {
   stroke-width: 2.5;
   paint-order: stroke;
 }
+
+/*
+  Přechod mezi stránkami — nativní cross-document View Transitions (bez JS routeru,
+  skripty stránek fungují beze změny). Nová stránka se „položí“ přes starou jako další
+  list výkresu: ostrý stírací řez zdola nahoru, mezi listy jede 4px žlutá lišta
+  (pozadí ::view-transition prosvítá mezerou mezi ořezy). Žádné prolínání průhlednosti.
+  Navigace zpět (historie) stírá opačně, shora dolů — typ „back“ nastavuje skript
+  v Layout.astro. Prohlížeče bez podpory a prefers-reduced-motion přejdou okamžitě.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+:root {
+  --page-wipe-bar: 4px;
+  --page-wipe-duration: 560ms;
+  --page-wipe-ease: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+::view-transition {
+  background-color: var(--color-zluta);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--page-wipe-duration);
+  animation-timing-function: var(--page-wipe-ease);
+  animation-fill-mode: both;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  animation-name: page-wipe-old;
+}
+::view-transition-new(root) {
+  animation-name: page-wipe-new;
+}
+
+/* Vpřed: hrana jede zdola nahoru — starý list se odřezává zespodu, nový odkrývá zespodu */
+@keyframes page-wipe-old {
+  from { clip-path: inset(0 0 0 0); }
+  to { clip-path: inset(0 0 calc(100% + var(--page-wipe-bar)) 0); }
+}
+@keyframes page-wipe-new {
+  from { clip-path: inset(calc(100% + var(--page-wipe-bar)) 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* Zpět: zrcadlově shora dolů */
+html:active-view-transition-type(back)::view-transition-old(root) {
+  animation-name: page-wipe-old-back;
+}
+html:active-view-transition-type(back)::view-transition-new(root) {
+  animation-name: page-wipe-new-back;
+}
+@keyframes page-wipe-old-back {
+  from { clip-path: inset(0 0 0 0); }
+  to { clip-path: inset(calc(100% + var(--page-wipe-bar)) 0 0 0); }
+}
+@keyframes page-wipe-new-back {
+  from { clip-path: inset(0 0 calc(100% + var(--page-wipe-bar)) 0); }
+  to { clip-path: inset(0 0 0 0); }
+}

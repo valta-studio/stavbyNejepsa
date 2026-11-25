@@ -73,6 +73,17 @@ const ogImageUrl = new URL(ogImage, Astro.site);
         window.addEventListener('resize', set);
       })();
     </script>
+    <script is:inline>
+      // Přechod stránek (viz global.css): při návratu v historii stírá opačným směrem.
+      // Musí běžet v <head> před prvním vykreslením nové stránky (událost pagereveal).
+      window.addEventListener('pagereveal', (e) => {
+        const act = window.navigation && window.navigation.activation;
+        if (!e.viewTransition || !e.viewTransition.types || !act || !act.from || !act.entry) return;
+        if (act.navigationType === 'traverse' && act.entry.index < act.from.index) {
+          e.viewTransition.types.add('back');
+        }
+      });
+    </script>
   </head>
   <body class="flex min-h-screen flex-col">
     <Header variant={headerVariant} />

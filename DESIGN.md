@@ -183,6 +183,7 @@ Chování komponent je pevné a přímé: celá plocha je klikací, hover kontra
 ### Navigation
 - **Hlavička:** fixní, bez podkladového pruhu — logo (verzálky, tučně, dvouřádkové) vlevo, na fotce papírové s žlutým akcentem, na betonu celé grafitové; tlačítko „Menu" vpravo jako papírový blok (padding 24px/20px) s třemi linkami, hover → žlutá
 - **Overlay menu:** papírový panel zprava (max-w-md, 300ms translate), zarovnaný vpravo; skupiny služeb text-2xl tučně s odsazenými podpoložkami (text-base, grafika); hover → okrová; dole CTA tlačítko a sociální odkazy
+- **Přechod mezi stránkami:** nativní cross-document View Transitions — nová stránka se položí přes starou ostrým stíracím řezem zdola nahoru (560ms, `cubic-bezier(0.76, 0, 0.24, 1)`), na hraně řezu jede 4px žlutá lišta; navigace zpět v historii stírá shora dolů. Žádné prolínání průhlednosti; při `prefers-reduced-motion` a v prohlížečích bez podpory přechod okamžitý. Styly v `global.css`, směr „zpět" nastavuje skript v `Layout.astro`.
 - **Patička:** grafitová, 4 sloupce, papírový text s průhlednostmi (/80 odkazy, /50 popisky), hover → žlutá
 
 ### Štítek realizace (signature)
